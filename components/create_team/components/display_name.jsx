@@ -12,7 +12,7 @@ import {cleanUpUrlable} from 'utils/url';
 import logoImage from 'images/logo.png';
 import NextIcon from 'components/widgets/icons/fa_next_icon';
 
-export default class TeamSignupDisplayNamePage extends React.PureComponent {
+export default class TeamSignupDisplayNamePage extends React.Component {
     static propTypes = {
 
         /*
@@ -30,6 +30,7 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
         super(props);
 
         this.state = {};
+        this.teamName = React.CreateRef();
     }
 
     componentDidMount() {
@@ -39,7 +40,7 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
     submitNext = (e) => {
         e.preventDefault();
 
-        var displayName = ReactDOM.findDOMNode(this.refs.name).value.trim();
+        var displayName = this.teamName.current.trim();
         if (!displayName) {
             this.setState({nameError: (
                 <FormattedMessage
@@ -102,7 +103,7 @@ export default class TeamSignupDisplayNamePage extends React.PureComponent {
                                 <input
                                     id='teamNameInput'
                                     type='text'
-                                    ref='name'
+                                    ref={this.teamName}
                                     className='form-control'
                                     placeholder=''
                                     maxLength='128'
