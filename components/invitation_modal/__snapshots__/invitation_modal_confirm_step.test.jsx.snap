@@ -4,17 +4,15 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
 <div
   className="InvitationModalConfirmStep"
 >
-  <BackIcon
-    className="back"
-    onClick={[MockFunction]}
-  />
   <div
     className="modal-icon"
   >
     <InviteIcon />
   </div>
-  <h1>
-    <InjectIntl(FormattedMarkdownMessage)
+  <h1
+    id="invitation_modal_title"
+  >
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**Guests** Invited to **{teamName}**"
       id="invitation_modal.confirm.guests_title"
       values={
@@ -27,7 +25,7 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
   <h2
     className="subtitle"
   >
-    <InjectIntl(FormattedMarkdownMessage)
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**{sentCount, number} {sentCount, plural, one {person} other {people}}** {sentCount, plural, one {has} other {have}} been invited, and **{notSentCount, number} {notSentCount, plural, one {invitation} other {invitations}}** {notSentCount, plural, one {was} other {were}} not sent"
       id="invitation_modal.confirm.members_subtitle"
       values={
@@ -45,7 +43,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Successful Invites"
         id="invitation_modal.confirm.sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -68,7 +65,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Invitations Not Sent"
         id="invitation_modal.confirm.not-sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -85,16 +81,24 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
     />
   </div>
   <div
-    className="confirm-done"
+    className="button-input-block"
   >
     <button
-      className="btn btn-primary"
+      className="btn invite-more"
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        defaultMessage="Invite More People"
+        id="invitation_modal.invite.more"
+      />
+    </button>
+    <button
+      className="btn btn-primary confirm-done"
       onClick={[MockFunction]}
     >
       <FormattedMessage
         defaultMessage="Done"
         id="invitation_modal.confirm.done"
-        values={Object {}}
       />
     </button>
   </div>
@@ -105,17 +109,15 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
 <div
   className="InvitationModalConfirmStep"
 >
-  <BackIcon
-    className="back"
-    onClick={[MockFunction]}
-  />
   <div
     className="modal-icon"
   >
     <InviteIcon />
   </div>
-  <h1>
-    <InjectIntl(FormattedMarkdownMessage)
+  <h1
+    id="invitation_modal_title"
+  >
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**Members** Invited to **{teamName}**"
       id="invitation_modal.confirm.members_title"
       values={
@@ -128,7 +130,7 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
   <h2
     className="subtitle"
   >
-    <InjectIntl(FormattedMarkdownMessage)
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**{sentCount, number} {sentCount, plural, one {person} other {people}}** {sentCount, plural, one {has} other {have}} been invited, and **{notSentCount, number} {notSentCount, plural, one {invitation} other {invitations}}** {notSentCount, plural, one {was} other {were}} not sent"
       id="invitation_modal.confirm.members_subtitle"
       values={
@@ -146,7 +148,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Successful Invites"
         id="invitation_modal.confirm.sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -169,7 +170,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Invitations Not Sent"
         id="invitation_modal.confirm.not-sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -186,16 +186,24 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
     />
   </div>
   <div
-    className="confirm-done"
+    className="button-input-block"
   >
     <button
-      className="btn btn-primary"
+      className="btn invite-more"
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        defaultMessage="Invite More People"
+        id="invitation_modal.invite.more"
+      />
+    </button>
+    <button
+      className="btn btn-primary confirm-done"
       onClick={[MockFunction]}
     >
       <FormattedMessage
         defaultMessage="Done"
         id="invitation_modal.confirm.done"
-        values={Object {}}
       />
     </button>
   </div>
@@ -206,17 +214,15 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
 <div
   className="InvitationModalConfirmStep"
 >
-  <BackIcon
-    className="back"
-    onClick={[MockFunction]}
-  />
   <div
     className="modal-icon"
   >
     <InviteIcon />
   </div>
-  <h1>
-    <InjectIntl(FormattedMarkdownMessage)
+  <h1
+    id="invitation_modal_title"
+  >
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**Members** Invited to **{teamName}**"
       id="invitation_modal.confirm.members_title"
       values={
@@ -229,7 +235,7 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
   <h2
     className="subtitle"
   >
-    <InjectIntl(FormattedMarkdownMessage)
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**{sentCount, number} {sentCount, plural, one {person} other {people}}** {sentCount, plural, one {has} other {have}} been invited"
       id="invitation_modal.confirm.members_subtitle_without_not_sent"
       values={
@@ -246,7 +252,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Successful Invites"
         id="invitation_modal.confirm.sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -263,16 +268,24 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
     />
   </div>
   <div
-    className="confirm-done"
+    className="button-input-block"
   >
     <button
-      className="btn btn-primary"
+      className="btn invite-more"
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        defaultMessage="Invite More People"
+        id="invitation_modal.invite.more"
+      />
+    </button>
+    <button
+      className="btn btn-primary confirm-done"
       onClick={[MockFunction]}
     >
       <FormattedMessage
         defaultMessage="Done"
         id="invitation_modal.confirm.done"
-        values={Object {}}
       />
     </button>
   </div>
@@ -283,17 +296,15 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
 <div
   className="InvitationModalConfirmStep"
 >
-  <BackIcon
-    className="back"
-    onClick={[MockFunction]}
-  />
   <div
     className="modal-icon"
   >
     <InviteIcon />
   </div>
-  <h1>
-    <InjectIntl(FormattedMarkdownMessage)
+  <h1
+    id="invitation_modal_title"
+  >
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**Members** Invited to **{teamName}**"
       id="invitation_modal.confirm.members_title"
       values={
@@ -306,22 +317,30 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
   <h2
     className="subtitle"
   >
-    <InjectIntl(FormattedMarkdownMessage)
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="No invitation sent"
       id="invitation_modal.confirm.members_subtitle_without_sent_and_not_sent"
     />
   </h2>
   <div
-    className="confirm-done"
+    className="button-input-block"
   >
     <button
-      className="btn btn-primary"
+      className="btn invite-more"
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        defaultMessage="Invite More People"
+        id="invitation_modal.invite.more"
+      />
+    </button>
+    <button
+      className="btn btn-primary confirm-done"
       onClick={[MockFunction]}
     >
       <FormattedMessage
         defaultMessage="Done"
         id="invitation_modal.confirm.done"
-        values={Object {}}
       />
     </button>
   </div>
@@ -332,17 +351,15 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
 <div
   className="InvitationModalConfirmStep"
 >
-  <BackIcon
-    className="back"
-    onClick={[MockFunction]}
-  />
   <div
     className="modal-icon"
   >
     <InviteIcon />
   </div>
-  <h1>
-    <InjectIntl(FormattedMarkdownMessage)
+  <h1
+    id="invitation_modal_title"
+  >
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**Members** Invited to **{teamName}**"
       id="invitation_modal.confirm.members_title"
       values={
@@ -355,7 +372,7 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
   <h2
     className="subtitle"
   >
-    <InjectIntl(FormattedMarkdownMessage)
+    <injectIntl(FormattedMarkdownMessage)
       defaultMessage="**{notSentCount, number} {notSentCount, plural, one {invitation} other {invitations}}** {notSentCount, plural, one {was} other {were}} not sent"
       id="invitation_modal.confirm.members_subtitle_without_sent"
       values={
@@ -372,7 +389,6 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
       <FormattedMessage
         defaultMessage="Invitations Not Sent"
         id="invitation_modal.confirm.not-sent-header"
-        values={Object {}}
       />
     </h2>
     <InvitationModalConfirmStepTable
@@ -389,16 +405,24 @@ exports[`components/invitation_modal/InvitationModalConfirmStep should match the
     />
   </div>
   <div
-    className="confirm-done"
+    className="button-input-block"
   >
     <button
-      className="btn btn-primary"
+      className="btn invite-more"
+      onClick={[MockFunction]}
+    >
+      <FormattedMessage
+        defaultMessage="Invite More People"
+        id="invitation_modal.invite.more"
+      />
+    </button>
+    <button
+      className="btn btn-primary confirm-done"
       onClick={[MockFunction]}
     >
       <FormattedMessage
         defaultMessage="Done"
         id="invitation_modal.confirm.done"
-        values={Object {}}
       />
     </button>
   </div>

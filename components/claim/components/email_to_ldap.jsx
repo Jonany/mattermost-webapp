@@ -11,7 +11,7 @@ import {t} from 'utils/i18n.jsx';
 import LoginMfa from 'components/login/login_mfa.jsx';
 import LocalizedInput from 'components/localized_input/localized_input';
 
-export default class EmailToLDAP extends React.Component {
+export default class EmailToLDAP extends React.PureComponent {
     static propTypes = {
         email: PropTypes.string,
         siteName: PropTypes.string,
@@ -28,6 +28,10 @@ export default class EmailToLDAP extends React.Component {
             serverError: '',
             showMfa: false,
         };
+
+        this.emailPasswordInput = React.createRef();
+        this.ldapIdInput = React.createRef();
+        this.ldapPasswordInput = React.createRef();
     }
 
     preSubmit = (e) => {
@@ -40,21 +44,21 @@ export default class EmailToLDAP extends React.Component {
             serverError: '',
         };
 
-        const password = this.refs.emailpassword.value;
+        const password = this.emailPasswordInput.current && this.emailPasswordInput.current.value;
         if (!password) {
             state.passwordError = Utils.localizeMessage('claim.email_to_ldap.pwdError', 'Please enter your password.');
             this.setState(state);
             return;
         }
 
-        const ldapId = this.refs.ldapid.value.trim();
+        const ldapId = this.ldapIdInput.current && this.ldapIdInput.current.value.trim();
         if (!ldapId) {
             state.ldapError = Utils.localizeMessage('claim.email_to_ldap.ldapIdError', 'Please enter your AD/LDAP ID.');
             this.setState(state);
             return;
         }
 
-        const ldapPassword = this.refs.ldappassword.value;
+        const ldapPassword = this.ldapPasswordInput.current && this.ldapPasswordInput.current.value;
         if (!ldapPassword) {
             state.ldapPasswordError = Utils.localizeMessage('claim.email_to_ldap.ldapPasswordError', 'Please enter your AD/LDAP password.');
             this.setState(state);
@@ -101,7 +105,7 @@ export default class EmailToLDAP extends React.Component {
                         this.setState({serverError: err.message, showMfa: false});
                     }
                 }
-            }
+            },
         );
     }
 
@@ -187,7 +191,7 @@ export default class EmailToLDAP extends React.Component {
                             type='password'
                             className='form-control'
                             name='emailPassword'
-                            ref='emailpassword'
+                            ref={this.emailPasswordInput}
                             autoComplete='off'
                             placeholder={{id: t('claim.email_to_ldap.pwd'), defaultMessage: 'Password'}}
                             spellCheck='false'
@@ -205,7 +209,7 @@ export default class EmailToLDAP extends React.Component {
                             type='text'
                             className='form-control'
                             name='ldapId'
-                            ref='ldapid'
+                            ref={this.ldapIdInput}
                             autoComplete='off'
                             placeholder={loginPlaceholder}
                             spellCheck='false'
@@ -217,7 +221,7 @@ export default class EmailToLDAP extends React.Component {
                             type='password'
                             className='form-control'
                             name='ldapPassword'
-                            ref='ldappassword'
+                            ref={this.ldapPasswordInput}
                             autoComplete='off'
                             placeholder={{id: t('claim.email_to_ldap.ldapPwd'), defaultMessage: 'AD/LDAP Password'}}
                             spellCheck='false'
@@ -230,7 +234,7 @@ export default class EmailToLDAP extends React.Component {
                     >
                         <FormattedMessage
                             id='claim.email_to_ldap.switchTo'
-                            defaultMessage='Switch account to AD/LDAP'
+                            defaultMessage='Switch Account to AD/LDAP'
                         />
                     </button>
                     {serverError}

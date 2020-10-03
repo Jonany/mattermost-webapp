@@ -2,8 +2,10 @@
 
 exports[`components/invitation_modal/InvitationModal should match the snapshot 1`] = `
 <RootPortal>
-  <FullScreenModal
+  <injectIntl(FullScreenModal)
+    ariaLabelledBy="invitation_modal_title"
     onClose={[Function]}
+    onGoBack={null}
     show={true}
   >
     <div
@@ -16,14 +18,12 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot 1
           <FormattedMessage
             defaultMessage="Yes, Discard"
             id="invitation-modal.discard-changes.button"
-            values={Object {}}
           />
         }
         message={
           <FormattedMessage
             defaultMessage="You have unsent invitations, are you sure you want to discard them?"
             id="invitation-modal.discard-changes.message"
-            values={Object {}}
           />
         }
         modalClass="invitation-modal-confirm"
@@ -34,24 +34,26 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot 1
           <FormattedMessage
             defaultMessage="Discard Changes"
             id="invitation-modal.discard-changes.title"
-            values={Object {}}
           />
         }
       />
       <InvitationModalInitialStep
+        emailInvitationsEnabled={true}
         goToGuests={[Function]}
         goToMembers={[Function]}
         teamName="Test name"
       />
     </div>
-  </FullScreenModal>
+  </injectIntl(FullScreenModal)>
 </RootPortal>
 `;
 
 exports[`components/invitation_modal/InvitationModal should match the snapshot when I have no permission to add users 1`] = `
 <RootPortal>
-  <FullScreenModal
+  <injectIntl(FullScreenModal)
+    ariaLabelledBy="invitation_modal_title"
     onClose={[Function]}
+    onGoBack={null}
     show={true}
   >
     <div
@@ -64,14 +66,12 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Yes, Discard"
             id="invitation-modal.discard-changes.button"
-            values={Object {}}
           />
         }
         message={
           <FormattedMessage
             defaultMessage="You have unsent invitations, are you sure you want to discard them?"
             id="invitation-modal.discard-changes.message"
-            values={Object {}}
           />
         }
         modalClass="invitation-modal-confirm"
@@ -82,7 +82,6 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Discard Changes"
             id="invitation-modal.discard-changes.title"
-            values={Object {}}
           />
         }
       />
@@ -90,21 +89,25 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
         currentTeamId="test"
         defaultChannels={Array []}
         defaultMessage=""
-        goBack={null}
+        emailInvitationsEnabled={true}
         myInvitableChannels={Array []}
         onEdit={[Function]}
         onSubmit={[Function]}
+        searchChannels={[MockFunction]}
         searchProfiles={[MockFunction]}
+        teamName="Test name"
       />
     </div>
-  </FullScreenModal>
+  </injectIntl(FullScreenModal)>
 </RootPortal>
 `;
 
 exports[`components/invitation_modal/InvitationModal should match the snapshot when I have no permission to invite guests 1`] = `
 <RootPortal>
-  <FullScreenModal
+  <injectIntl(FullScreenModal)
+    ariaLabelledBy="invitation_modal_title"
     onClose={[Function]}
+    onGoBack={null}
     show={true}
   >
     <div
@@ -117,14 +120,12 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Yes, Discard"
             id="invitation-modal.discard-changes.button"
-            values={Object {}}
           />
         }
         message={
           <FormattedMessage
             defaultMessage="You have unsent invitations, are you sure you want to discard them?"
             id="invitation-modal.discard-changes.message"
-            values={Object {}}
           />
         }
         modalClass="invitation-modal-confirm"
@@ -135,26 +136,29 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Discard Changes"
             id="invitation-modal.discard-changes.title"
-            values={Object {}}
           />
         }
       />
-      <InvitationModalMembersStep
-        goBack={null}
+      <Connect(injectIntl(InvitationModalMembersStep))
+        currentTeamId="test"
+        emailInvitationsEnabled={true}
         inviteId="test-invite-id"
         onEdit={[Function]}
         onSubmit={[Function]}
         searchProfiles={[MockFunction]}
+        teamName="Test name"
       />
     </div>
-  </FullScreenModal>
+  </injectIntl(FullScreenModal)>
 </RootPortal>
 `;
 
 exports[`components/invitation_modal/InvitationModal should match the snapshot when not show 1`] = `
 <RootPortal>
-  <FullScreenModal
+  <injectIntl(FullScreenModal)
+    ariaLabelledBy="invitation_modal_title"
     onClose={[Function]}
+    onGoBack={null}
     show={false}
   >
     <div
@@ -167,14 +171,12 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Yes, Discard"
             id="invitation-modal.discard-changes.button"
-            values={Object {}}
           />
         }
         message={
           <FormattedMessage
             defaultMessage="You have unsent invitations, are you sure you want to discard them?"
             id="invitation-modal.discard-changes.message"
-            values={Object {}}
           />
         }
         modalClass="invitation-modal-confirm"
@@ -185,16 +187,16 @@ exports[`components/invitation_modal/InvitationModal should match the snapshot w
           <FormattedMessage
             defaultMessage="Discard Changes"
             id="invitation-modal.discard-changes.title"
-            values={Object {}}
           />
         }
       />
       <InvitationModalInitialStep
+        emailInvitationsEnabled={true}
         goToGuests={[Function]}
         goToMembers={[Function]}
         teamName="Test name"
       />
     </div>
-  </FullScreenModal>
+  </injectIntl(FullScreenModal)>
 </RootPortal>
 `;

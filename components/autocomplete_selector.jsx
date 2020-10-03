@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import SuggestionBox from 'components/suggestion/suggestion_box.jsx';
-import SuggestionList from 'components/suggestion/suggestion_list.jsx';
+import SuggestionList from 'components/suggestion/suggestion_list';
 
 export default class AutocompleteSelector extends React.PureComponent {
     static propTypes = {
@@ -18,6 +18,10 @@ export default class AutocompleteSelector extends React.PureComponent {
         helpText: PropTypes.node,
         placeholder: PropTypes.string,
         footer: PropTypes.node,
+        disabled: PropTypes.bool,
+        toggleFocus: PropTypes.func,
+        listComponent: PropTypes.elementType,
+        listStyle: PropTypes.string,
     };
 
     static defaultProps = {
@@ -25,6 +29,8 @@ export default class AutocompleteSelector extends React.PureComponent {
         id: '',
         labelClassName: '',
         inputClassName: '',
+        listComponent: SuggestionList,
+        listStyle: 'top',
     };
 
     constructor(props) {
@@ -63,10 +69,18 @@ export default class AutocompleteSelector extends React.PureComponent {
 
     onFocus = () => {
         this.setState({focused: true});
+
+        if (this.props.toggleFocus) {
+            this.props.toggleFocus(true);
+        }
     }
 
     onBlur = () => {
         this.setState({focused: false});
+
+        if (this.props.toggleFocus) {
+            this.props.toggleFocus(false);
+        }
     }
 
     render() {
@@ -79,6 +93,9 @@ export default class AutocompleteSelector extends React.PureComponent {
             helpText,
             inputClassName,
             value,
+            disabled,
+            listComponent,
+            listStyle,
         } = this.props;
 
         const {focused} = this.state;
@@ -118,7 +135,7 @@ export default class AutocompleteSelector extends React.PureComponent {
                     <SuggestionBox
                         placeholder={placeholder}
                         ref={this.setSuggestionRef}
-                        listComponent={SuggestionList}
+                        listComponent={listComponent}
                         className='form-control'
                         containerClass='select-suggestion-container'
                         value={input}
@@ -133,6 +150,8 @@ export default class AutocompleteSelector extends React.PureComponent {
                         openOnFocus={true}
                         openWhenEmpty={true}
                         replaceAllInputOnSelect={true}
+                        disabled={disabled}
+                        listStyle={listStyle}
                     />
                     {helpTextContent}
                     {footer}

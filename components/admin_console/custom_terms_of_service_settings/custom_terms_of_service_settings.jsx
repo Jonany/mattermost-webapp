@@ -5,11 +5,11 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 
-import AdminSettings from 'components/admin_console/admin_settings.jsx';
+import AdminSettings from 'components/admin_console/admin_settings';
 
 import SettingsGroup from 'components/admin_console/settings_group.jsx';
-import BooleanSetting from 'components/admin_console/boolean_setting.jsx';
-import TextSetting from 'components/admin_console/text_setting.jsx';
+import BooleanSetting from 'components/admin_console/boolean_setting';
+import TextSetting from 'components/admin_console/text_setting';
 import FormattedMarkdownMessage from 'components/formatted_markdown_message.jsx';
 import LoadingScreen from 'components/loading_screen';
 
@@ -180,9 +180,9 @@ export default class CustomTermsOfServiceSettings extends AdminSettings {
                         />
                     }
                     value={this.state.termsEnabled}
-                    disabled={!(this.props.license.IsLicensed && this.props.license.CustomTermsOfService === 'true')}
                     onChange={this.handleTermsEnabledChange}
                     setByEnv={this.isSetByEnv('SupportSettings.CustomTermsOfServiceEnabled')}
+                    disabled={this.props.isDisabled || !(this.props.license.IsLicensed && this.props.license.CustomTermsOfService === 'true')}
                 />
                 <TextSetting
                     key={'customTermsOfServiceText'}
@@ -200,11 +200,11 @@ export default class CustomTermsOfServiceSettings extends AdminSettings {
                             defaultMessage='Text that will appear in your custom Terms of Service. Supports Markdown-formatted text.'
                         />
                     }
-                    disabled={!this.state.termsEnabled}
                     onChange={this.handleTermsTextChange}
                     setByEnv={this.isSetByEnv('SupportSettings.CustomTermsOfServiceText')}
                     value={this.state.termsText}
                     maxLength={Constants.MAX_TERMS_OF_SERVICE_TEXT_LENGTH}
+                    disabled={this.props.isDisabled || !this.state.termsEnabled}
                 />
                 <TextSetting
                     key={'customTermsOfServiceReAcceptancePeriod'}
@@ -222,10 +222,10 @@ export default class CustomTermsOfServiceSettings extends AdminSettings {
                             defaultMessage='The number of days before Terms of Service acceptance expires, and the terms must be re-accepted.'
                         />
                     }
-                    disabled={!this.state.termsEnabled}
                     value={this.state.reAcceptancePeriod}
                     onChange={this.handleReAcceptancePeriodChange}
                     setByEnv={this.isSetByEnv('SupportSettings.CustomTermsOfServiceReAcceptancePeriod')}
+                    disabled={this.props.isDisabled || !this.state.termsEnabled}
                 />
             </SettingsGroup>
         );

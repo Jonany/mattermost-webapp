@@ -1,10 +1,12 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import PropTypes from 'prop-types';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import PDFJS from 'pdfjs-dist';
+import {getFileDownloadUrl} from 'mattermost-redux/utils/file_utils';
 
 import LoadingSpinner from 'components/widgets/loading/loading_spinner';
 import FileInfoPreview from 'components/file_info_preview';
@@ -41,17 +43,30 @@ export default class PDFPreview extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.updateStateFromProps(this.props);
+        this.getPdfDocument();
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line camelcase
-        if (this.props.fileUrl !== nextProps.fileUrl) {
-            this.updateStateFromProps(nextProps);
+    static getDerivedStateFromProps(props, state) {
+        if (props.fileUrl !== state.prevFileUrl) {
+            return {
+                pdf: null,
+                pdfPages: {},
+                pdfPagesLoaded: {},
+                numPages: 0,
+                loading: true,
+                success: false,
+                prevFileUrl: props.fileUrl,
+            };
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.fileUrl !== prevProps.fileUrl) {
+            this.getPdfDocument();
             this.pdfPagesRendered = {};
         }
-    }
 
-    componentDidUpdate() {
         if (this.state.success) {
             for (let i = 0; i < this.state.numPages; i++) {
                 this.renderPDFPage(i);
@@ -80,17 +95,8 @@ export default class PDFPreview extends React.PureComponent {
         this.pdfPagesRendered[pageIndex] = true;
     }
 
-    updateStateFromProps = (props) => {
-        this.setState({
-            pdf: null,
-            pdfPages: {},
-            pdfPagesLoaded: {},
-            numPages: 0,
-            loading: true,
-            success: false,
-        });
-
-        PDFJS.getDocument(props.fileUrl).then(this.onDocumentLoad, this.onDocumentLoadError);
+    getPdfDocument = () => {
+        PDFJS.getDocument(this.props.fileUrl).then(this.onDocumentLoad).catch(this.onDocumentLoadError);
     }
 
     onDocumentLoad = (pdf) => {
@@ -144,7 +150,7 @@ export default class PDFPreview extends React.PureComponent {
                 <canvas
                     ref={'pdfCanvas' + i}
                     key={'previewpdfcanvas' + i}
-                />
+                />,
             );
 
             if (i < this.state.numPages - 1 && this.state.numPages > 1) {
@@ -152,23 +158,25 @@ export default class PDFPreview extends React.PureComponent {
                     <div
                         key={'previewpdfspacer' + i}
                         className='pdf-preview-spacer'
-                    />
+                    />,
                 );
             }
         }
 
         if (this.state.pdf.numPages > MAX_PDF_PAGES) {
+            const fileDownloadUrl = this.props.fileInfo.link || getFileDownloadUrl(this.props.fileInfo.id);
+
             pdfCanvases.push(
                 <a
                     key='previewpdfmorepages'
-                    href={this.props.fileUrl}
+                    href={fileDownloadUrl}
                     className='pdf-max-pages'
                 >
                     <FormattedMessage
                         id='pdf_preview.max_pages'
                         defaultMessage='Download to read more pages'
                     />
-                </a>
+                </a>,
             );
         }
 
@@ -179,3 +187,4 @@ export default class PDFPreview extends React.PureComponent {
         );
     }
 }
+/* eslint-enable react/no-string-refs */

@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-import {shallowWithIntl} from 'tests/helpers/intl-test-helper.jsx';
+import {shallowWithIntl} from 'tests/helpers/intl-test-helper';
 import AuditTable from 'components/audit_table/audit_table.jsx';
 
 describe('components/audit_table/AuditTable', () => {
@@ -20,12 +20,13 @@ describe('components/audit_table/AuditTable', () => {
         getUser: jest.fn(),
         getByName: jest.fn(),
         actions,
+        getDirectTeammate: jest.fn(),
     };
 
     test('should match snapshot with no audits', () => {
         const wrapper = shallowWithIntl(
-            <AuditTable {...baseProps}/>
-        ).dive();
+            <AuditTable {...baseProps}/>,
+        );
 
         expect(wrapper).toMatchSnapshot();
     });
@@ -54,8 +55,8 @@ describe('components/audit_table/AuditTable', () => {
 
         const props = {...baseProps, audits};
         const wrapper = shallowWithIntl(
-            <AuditTable {...props}/>
-        ).dive();
+            <AuditTable {...props}/>,
+        );
 
         expect(wrapper).toMatchSnapshot();
     });

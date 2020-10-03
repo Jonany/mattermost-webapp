@@ -4,10 +4,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Tooltip} from 'react-bootstrap';
 import {FormattedMessage} from 'react-intl';
 
-import ConfirmModal from 'components/confirm_modal.jsx';
+import ConfirmModal from 'components/confirm_modal';
+import OverlayTrigger from 'components/overlay_trigger';
 import LoadingWrapper from 'components/widgets/loading/loading_wrapper';
 
 import * as Utils from 'utils/utils.jsx';
@@ -15,10 +16,11 @@ import Constants from 'utils/constants';
 
 const MAX_TEAMS_PER_SCHEME_SUMMARY = 8;
 
-export default class PermissionsSchemeSummary extends React.Component {
+export default class PermissionsSchemeSummary extends React.PureComponent {
     static propTypes = {
         scheme: PropTypes.object.isRequired,
         teams: PropTypes.array,
+        isDisabled: PropTypes.func,
         actions: PropTypes.shape({
             deleteScheme: PropTypes.func.isRequired,
         }).isRequired,
@@ -110,6 +112,9 @@ export default class PermissionsSchemeSummary extends React.Component {
 
     delete = (e) => {
         e.stopPropagation();
+        if (this.props.isDisabled) {
+            return;
+        }
         this.setState({showConfirmModal: true, serverError: null});
     }
 
@@ -118,7 +123,7 @@ export default class PermissionsSchemeSummary extends React.Component {
     }
 
     render = () => {
-        const scheme = this.props.scheme;
+        const {scheme, isDisabled} = this.props;
 
         let teams = this.props.teams ? this.props.teams.map((team) => (
             <span
@@ -163,6 +168,7 @@ export default class PermissionsSchemeSummary extends React.Component {
         return (
             <div
                 className='permissions-scheme-summary'
+                data-testid='permissions-scheme-summary'
                 onClick={this.goToEdit}
             >
                 <div onClick={this.stopPropagation}>{confirmModal}</div>
@@ -174,6 +180,7 @@ export default class PermissionsSchemeSummary extends React.Component {
                     </div>
                     <div className='actions'>
                         <Link
+                            data-testid={`${scheme.display_name}-edit`}
                             className='edit-button'
                             to={'/admin_console/user_management/permissions/team_override_scheme/' + scheme.id}
                         >
@@ -184,7 +191,8 @@ export default class PermissionsSchemeSummary extends React.Component {
                         </Link>
                         {'-'}
                         <a
-                            className='delete-button'
+                            data-testid={`${scheme.display_name}-delete`}
+                            className={isDisabled ? 'delete-button disabled' : 'delete-button'}
                             onClick={this.delete}
                         >
                             <FormattedMessage

@@ -21,6 +21,7 @@ import {
     formatUsersWithPostsPerDayData,
     formatChannelDoughtnutData,
     formatPostDoughtnutData,
+    synchronizeChartLabels,
 } from '../format';
 
 const StatTypes = Constants.StatTypes;
@@ -46,9 +47,11 @@ export default class SystemAnalytics extends React.PureComponent {
         const stats = this.props.stats;
         const isLicensed = this.props.isLicensed;
         const skippedIntensiveQueries = stats[StatTypes.TOTAL_POSTS] === -1;
-        const postCountsDay = formatPostsPerDayData(stats[StatTypes.POST_PER_DAY]);
-        const botPostCountsDay = formatPostsPerDayData(stats[StatTypes.BOT_POST_PER_DAY]);
-        const userCountsWithPostsDay = formatUsersWithPostsPerDayData(stats[StatTypes.USERS_WITH_POSTS_PER_DAY]);
+
+        const labels = synchronizeChartLabels(stats[StatTypes.POST_PER_DAY], stats[StatTypes.BOT_POST_PER_DAY], stats[StatTypes.USERS_WITH_POSTS_PER_DAY]);
+        const postCountsDay = formatPostsPerDayData(labels, stats[StatTypes.POST_PER_DAY]);
+        const botPostCountsDay = formatPostsPerDayData(labels, stats[StatTypes.BOT_POST_PER_DAY]);
+        const userCountsWithPostsDay = formatUsersWithPostsPerDayData(labels, stats[StatTypes.USERS_WITH_POSTS_PER_DAY]);
 
         let banner;
         let postCount;

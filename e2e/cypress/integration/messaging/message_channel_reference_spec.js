@@ -7,15 +7,20 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
+// Stage: @prod
+// Group: @messaging
+
 import * as TIMEOUTS from '../../fixtures/timeouts';
 
 describe('Messaging', () => {
     before(() => {
-        cy.apiLogin('user-1');
-        cy.visit('/');
+        // # Login as test user and visit town-square
+        cy.apiInitSetup({loginAfter: true}).then(({team}) => {
+            cy.visit(`/${team.name}/channels/town-square`);
+        });
     });
 
-    it('M18707 - Autocomplete should close if tildes are deleted using backspace', () => {
+    it('MM-T174 Autocomplete should close if tildes are deleted using backspace', () => {
         const msg = 'foo';
 
         // # Make a post
@@ -25,13 +30,13 @@ describe('Messaging', () => {
         cy.get('#post_textbox').type('{uparrow}');
 
         // # Insert a tilde (~) at the beginning of the post to be edited
-        cy.get('#edit_textbox').should('be.visible').wait(TIMEOUTS.TINY).type('{ctrl}{home}').type('~');
+        cy.get('#edit_textbox').should('be.visible').wait(TIMEOUTS.HALF_SEC).type('{home}~');
 
         // * autocomplete opens
         cy.get('#suggestionList').should('be.visible');
 
         // # Delete the tilde by backspacing
-        cy.get('#edit_textbox').type('{ctrl}{home}{rightarrow}{backspace}');
+        cy.get('#edit_textbox').type('{home}{rightarrow}{backspace}');
 
         // * autocomplete closes
         cy.get('#suggestionList').should('not.be.visible');

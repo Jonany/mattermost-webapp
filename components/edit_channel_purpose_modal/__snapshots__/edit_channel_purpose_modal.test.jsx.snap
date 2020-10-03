@@ -29,7 +29,7 @@ exports[`comoponents/EditChannelPurposeModal clear error on next 1`] = `
   renderBackdrop={[Function]}
   restoreFocus={true}
   role="dialog"
-  show={true}
+  show={false}
 >
   <ModalHeader
     bsClass="modal-header"
@@ -45,7 +45,6 @@ exports[`comoponents/EditChannelPurposeModal clear error on next 1`] = `
         <FormattedMessage
           defaultMessage="Edit Purpose"
           id="edit_channel_purpose_modal.title1"
-          values={Object {}}
         />
       </span>
     </ModalTitle>
@@ -58,10 +57,10 @@ exports[`comoponents/EditChannelPurposeModal clear error on next 1`] = `
       <FormattedMessage
         defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
         id="edit_channel_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -82,19 +81,17 @@ exports[`comoponents/EditChannelPurposeModal clear error on next 1`] = `
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
       className="btn btn-primary save-button"
-      disabled={true}
+      disabled={false}
       onClick={[Function]}
       type="button"
     >
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -146,7 +143,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error 1`] = `
         <FormattedMessage
           defaultMessage="Edit Purpose"
           id="edit_channel_purpose_modal.title1"
-          values={Object {}}
         />
       </span>
     </ModalTitle>
@@ -159,10 +155,10 @@ exports[`comoponents/EditChannelPurposeModal match with modal error 1`] = `
       <FormattedMessage
         defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
         id="edit_channel_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -193,7 +189,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error 1`] = `
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
@@ -205,7 +200,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error 1`] = `
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -257,7 +251,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error with fake id
         <FormattedMessage
           defaultMessage="Edit Purpose"
           id="edit_channel_purpose_modal.title1"
-          values={Object {}}
         />
       </span>
     </ModalTitle>
@@ -270,10 +263,10 @@ exports[`comoponents/EditChannelPurposeModal match with modal error with fake id
       <FormattedMessage
         defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
         id="edit_channel_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -304,7 +297,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error with fake id
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
@@ -316,7 +308,6 @@ exports[`comoponents/EditChannelPurposeModal match with modal error with fake id
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -368,7 +359,6 @@ exports[`comoponents/EditChannelPurposeModal should match for private channel 1`
         <FormattedMessage
           defaultMessage="Edit Purpose"
           id="edit_channel_purpose_modal.title1"
-          values={Object {}}
         />
       </span>
     </ModalTitle>
@@ -381,10 +371,10 @@ exports[`comoponents/EditChannelPurposeModal should match for private channel 1`
       <FormattedMessage
         defaultMessage="This text appears in the \\\\\\"View Info\\\\\\" modal of the private channel."
         id="edit_channel_private_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -405,7 +395,6 @@ exports[`comoponents/EditChannelPurposeModal should match for private channel 1`
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
@@ -417,7 +406,6 @@ exports[`comoponents/EditChannelPurposeModal should match for private channel 1`
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -469,7 +457,6 @@ exports[`comoponents/EditChannelPurposeModal should match on init 1`] = `
         <FormattedMessage
           defaultMessage="Edit Purpose"
           id="edit_channel_purpose_modal.title1"
-          values={Object {}}
         />
       </span>
     </ModalTitle>
@@ -482,10 +469,10 @@ exports[`comoponents/EditChannelPurposeModal should match on init 1`] = `
       <FormattedMessage
         defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
         id="edit_channel_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -506,7 +493,6 @@ exports[`comoponents/EditChannelPurposeModal should match on init 1`] = `
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
@@ -518,7 +504,6 @@ exports[`comoponents/EditChannelPurposeModal should match on init 1`] = `
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -527,13 +512,11 @@ exports[`comoponents/EditChannelPurposeModal should match on init 1`] = `
 
 exports[`comoponents/EditChannelPurposeModal should match submitted 1`] = `
 <Modal
-  animation={true}
-  aria-labelledby="editChannelPurposeModalLabel"
   autoFocus={true}
   backdrop={true}
-  bsClass="modal"
-  dialogClassName="a11y__modal"
-  dialogComponentClass={[Function]}
+  backdropClassName="modal-backdrop"
+  backdropTransition={[Function]}
+  containerClassName="modal-open"
   enforceFocus={true}
   keyboard={true}
   manager={
@@ -549,80 +532,88 @@ exports[`comoponents/EditChannelPurposeModal should match submitted 1`] = `
     }
   }
   onEntering={[Function]}
-  onExited={[MockFunction]}
+  onExited={[Function]}
   onHide={[Function]}
   renderBackdrop={[Function]}
   restoreFocus={true}
-  role="dialog"
   show={true}
+  transition={[Function]}
 >
-  <ModalHeader
-    bsClass="modal-header"
-    closeButton={true}
-    closeLabel="Close"
+  <ModalDialog
+    aria-labelledby="editChannelPurposeModalLabel"
+    bsClass="modal"
+    className=""
+    dialogClassName="a11y__modal"
+    handleDialogMouseDown={[Function]}
+    onClick={[Function]}
+    role="dialog"
+    style={Object {}}
   >
-    <ModalTitle
-      bsClass="modal-title"
-      componentClass="h1"
-      id="editChannelPurposeModalLabel"
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
     >
-      <span>
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h1"
+        id="editChannelPurposeModalLabel"
+      >
+        <span>
+          <FormattedMessage
+            defaultMessage="Edit Purpose"
+            id="edit_channel_purpose_modal.title1"
+          />
+        </span>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <p>
         <FormattedMessage
-          defaultMessage="Edit Purpose"
-          id="edit_channel_purpose_modal.title1"
-          values={Object {}}
+          defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
+          id="edit_channel_purpose_modal.body"
         />
-      </span>
-    </ModalTitle>
-  </ModalHeader>
-  <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
-  >
-    <p>
-      <FormattedMessage
-        defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
-        id="edit_channel_purpose_modal.body"
-        values={Object {}}
+      </p>
+      <textarea
+        aria-label="edit purpose"
+        className="form-control no-resize"
+        maxLength="250"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        rows="6"
+        value="purpose"
       />
-    </p>
-    <textarea
-      className="form-control no-resize"
-      maxLength="250"
-      onChange={[Function]}
-      onKeyDown={[Function]}
-      rows="6"
-      value="purpose"
-    />
-  </ModalBody>
-  <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
-  >
-    <button
-      className="btn btn-link cancel-button"
-      onClick={[Function]}
-      type="button"
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
     >
-      <FormattedMessage
-        defaultMessage="Cancel"
-        id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
-      />
-    </button>
-    <button
-      className="btn btn-primary save-button"
-      disabled={true}
-      onClick={[Function]}
-      type="button"
-    >
-      <FormattedMessage
-        defaultMessage="Save"
-        id="edit_channel_purpose_modal.save"
-        values={Object {}}
-      />
-    </button>
-  </ModalFooter>
+      <button
+        className="btn btn-link cancel-button"
+        onClick={[Function]}
+        type="button"
+      >
+        <FormattedMessage
+          defaultMessage="Cancel"
+          id="edit_channel_purpose_modal.cancel"
+        />
+      </button>
+      <button
+        className="btn btn-primary save-button"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        <FormattedMessage
+          defaultMessage="Save"
+          id="edit_channel_purpose_modal.save"
+        />
+      </button>
+    </ModalFooter>
+  </ModalDialog>
 </Modal>
 `;
 
@@ -671,7 +662,6 @@ exports[`comoponents/EditChannelPurposeModal should match with display name 1`] 
         <FormattedMessage
           defaultMessage="Edit Purpose for "
           id="edit_channel_purpose_modal.title2"
-          values={Object {}}
         />
         <span
           className="name"
@@ -689,10 +679,10 @@ exports[`comoponents/EditChannelPurposeModal should match with display name 1`] 
       <FormattedMessage
         defaultMessage="Describe how this channel should be used. This text appears in the channel list in the \\"More...\\" menu and helps others decide whether to join."
         id="edit_channel_purpose_modal.body"
-        values={Object {}}
       />
     </p>
     <textarea
+      aria-label="edit purpose"
       className="form-control no-resize"
       maxLength="250"
       onChange={[Function]}
@@ -713,7 +703,6 @@ exports[`comoponents/EditChannelPurposeModal should match with display name 1`] 
       <FormattedMessage
         defaultMessage="Cancel"
         id="edit_channel_purpose_modal.cancel"
-        values={Object {}}
       />
     </button>
     <button
@@ -725,7 +714,6 @@ exports[`comoponents/EditChannelPurposeModal should match with display name 1`] 
       <FormattedMessage
         defaultMessage="Save"
         id="edit_channel_purpose_modal.save"
-        values={Object {}}
       />
     </button>
   </ModalFooter>

@@ -37,19 +37,16 @@ exports[`components/NewChannelModal should match snapshot, display only private 
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -60,7 +57,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -77,11 +73,11 @@ exports[`components/NewChannelModal should match snapshot, display only private 
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -102,12 +98,10 @@ exports[`components/NewChannelModal should match snapshot, display only private 
                   <FormattedMessage
                     defaultMessage="Private"
                     id="channel_modal.privateName"
-                    values={Object {}}
                   />
                   <FormattedMessage
-                    defaultMessage=" - Only invited members can join this channel."
+                    defaultMessage=" - Only invited members can join this channel"
                     id="channel_modal.privateHint"
-                    values={Object {}}
                   />
                 </div>
               </div>
@@ -119,11 +113,11 @@ exports[`components/NewChannelModal should match snapshot, display only private 
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -156,7 +150,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -171,11 +164,11 @@ exports[`components/NewChannelModal should match snapshot, display only private 
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -184,7 +177,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -206,7 +198,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -219,11 +210,11 @@ exports[`components/NewChannelModal should match snapshot, display only private 
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -232,7 +223,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -254,7 +244,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -274,7 +263,6 @@ exports[`components/NewChannelModal should match snapshot, display only private 
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -284,9 +272,8 @@ exports[`components/NewChannelModal should match snapshot, display only private 
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -332,19 +319,16 @@ exports[`components/NewChannelModal should match snapshot, display only public c
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -355,7 +339,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -372,11 +355,11 @@ exports[`components/NewChannelModal should match snapshot, display only public c
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -397,12 +380,10 @@ exports[`components/NewChannelModal should match snapshot, display only public c
                   <FormattedMessage
                     defaultMessage="Public"
                     id="channel_modal.publicName"
-                    values={Object {}}
                   />
                   <FormattedMessage
-                    defaultMessage=" - Anyone can join this channel."
+                    defaultMessage=" - Anyone can join this channel"
                     id="channel_modal.publicHint"
-                    values={Object {}}
                   />
                 </div>
               </div>
@@ -414,11 +395,11 @@ exports[`components/NewChannelModal should match snapshot, display only public c
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -451,7 +432,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -466,11 +446,11 @@ exports[`components/NewChannelModal should match snapshot, display only public c
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -479,7 +459,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -501,7 +480,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -514,11 +492,11 @@ exports[`components/NewChannelModal should match snapshot, display only public c
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -527,7 +505,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -549,7 +526,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -569,7 +545,6 @@ exports[`components/NewChannelModal should match snapshot, display only public c
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -579,9 +554,8 @@ exports[`components/NewChannelModal should match snapshot, display only public c
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -627,19 +601,16 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -650,7 +621,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -667,11 +637,11 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -686,6 +656,7 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={true}
                     id="public"
                     name="channelType"
@@ -701,12 +672,10 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
                     <FormattedMessage
                       defaultMessage="Public"
                       id="channel_modal.publicName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Anyone can join this channel."
+                      defaultMessage=" - Anyone can join this channel"
                       id="channel_modal.publicHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -716,6 +685,7 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={false}
                     id="private"
                     name="channelType"
@@ -731,12 +701,10 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
                     <FormattedMessage
                       defaultMessage="Private"
                       id="channel_modal.privateName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Only invited members can join this channel."
+                      defaultMessage=" - Only invited members can join this channel"
                       id="channel_modal.privateHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -749,11 +717,11 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -786,7 +754,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -801,11 +768,11 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -814,7 +781,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -836,7 +802,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -849,11 +814,11 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -862,7 +827,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -884,7 +848,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -904,7 +867,6 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -914,9 +876,8 @@ exports[`components/NewChannelModal should match snapshot, modal not showing 1`]
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -962,19 +923,16 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -985,7 +943,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -1002,11 +959,11 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -1021,6 +978,7 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={true}
                     id="public"
                     name="channelType"
@@ -1036,12 +994,10 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
                     <FormattedMessage
                       defaultMessage="Public"
                       id="channel_modal.publicName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Anyone can join this channel."
+                      defaultMessage=" - Anyone can join this channel"
                       id="channel_modal.publicHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1051,6 +1007,7 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={false}
                     id="private"
                     name="channelType"
@@ -1066,12 +1023,10 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
                     <FormattedMessage
                       defaultMessage="Private"
                       id="channel_modal.privateName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Only invited members can join this channel."
+                      defaultMessage=" - Only invited members can join this channel"
                       id="channel_modal.privateHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1084,11 +1039,11 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -1121,7 +1076,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -1136,11 +1090,11 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -1149,7 +1103,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1171,7 +1124,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -1184,11 +1136,11 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -1197,7 +1149,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1219,7 +1170,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -1239,7 +1189,6 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -1249,9 +1198,8 @@ exports[`components/NewChannelModal should match snapshot, modal showing 1`] = `
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -1297,19 +1245,16 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -1320,7 +1265,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -1337,11 +1281,11 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -1356,6 +1300,7 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={true}
                     id="public"
                     name="channelType"
@@ -1371,12 +1316,10 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
                     <FormattedMessage
                       defaultMessage="Public"
                       id="channel_modal.publicName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Anyone can join this channel."
+                      defaultMessage=" - Anyone can join this channel"
                       id="channel_modal.publicHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1386,6 +1329,7 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={false}
                     id="private"
                     name="channelType"
@@ -1401,12 +1345,10 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
                     <FormattedMessage
                       defaultMessage="Private"
                       id="channel_modal.privateName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Only invited members can join this channel."
+                      defaultMessage=" - Only invited members can join this channel"
                       id="channel_modal.privateHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1419,11 +1361,11 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -1449,9 +1391,8 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               className="input__help error"
             >
               <FormattedMessage
-                defaultMessage="Channel name must be 2 or more characters"
+                defaultMessage="Display name must have at least 2 characters."
                 id="channel_modal.displayNameError"
-                values={Object {}}
               />
               <Component />
             </p>
@@ -1466,7 +1407,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -1481,11 +1421,11 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -1494,7 +1434,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1516,7 +1455,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -1529,11 +1467,11 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -1542,7 +1480,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1564,7 +1501,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -1584,7 +1520,6 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -1594,9 +1529,8 @@ exports[`components/NewChannelModal should match snapshot, on displayNameError 1
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -1642,19 +1576,16 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -1665,7 +1596,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -1682,11 +1612,11 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -1701,6 +1631,7 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={true}
                     id="public"
                     name="channelType"
@@ -1716,12 +1647,10 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
                     <FormattedMessage
                       defaultMessage="Public"
                       id="channel_modal.publicName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Anyone can join this channel."
+                      defaultMessage=" - Anyone can join this channel"
                       id="channel_modal.publicHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1731,6 +1660,7 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={false}
                     id="private"
                     name="channelType"
@@ -1746,12 +1676,10 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
                     <FormattedMessage
                       defaultMessage="Private"
                       id="channel_modal.privateName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Only invited members can join this channel."
+                      defaultMessage=" - Only invited members can join this channel"
                       id="channel_modal.privateHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -1764,11 +1692,11 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -1801,7 +1729,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -1816,11 +1743,11 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -1829,7 +1756,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1851,7 +1777,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -1864,11 +1789,11 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -1877,7 +1802,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -1899,7 +1823,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
             <div
@@ -1933,7 +1856,6 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -1943,9 +1865,8 @@ exports[`components/NewChannelModal should match snapshot, on serverError 1`] = 
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>
@@ -1991,19 +1912,16 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
       closeLabel="Close"
     >
       <button
+        aria-label="Close"
         className="close"
         onClick={[MockFunction]}
+        title="Close"
         type="button"
       >
         <span
           aria-hidden="true"
         >
           ×
-        </span>
-        <span
-          className="sr-only"
-        >
-          Close
         </span>
       </button>
       <ModalTitle
@@ -2014,7 +1932,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
         <FormattedMessage
           defaultMessage="New Channel"
           id="channel_modal.modalTitle"
-          values={Object {}}
         />
       </ModalTitle>
     </ModalHeader>
@@ -2031,11 +1948,11 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
         >
           <label
             className="col-sm-3 form__label control-label"
+            id="channelModalTypeLabel"
           >
             <FormattedMessage
               defaultMessage="Type"
               id="channel_modal.type"
-              values={Object {}}
             />
           </label>
           <div
@@ -2050,6 +1967,7 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={false}
                     id="public"
                     name="channelType"
@@ -2065,12 +1983,10 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
                     <FormattedMessage
                       defaultMessage="Public"
                       id="channel_modal.publicName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Anyone can join this channel."
+                      defaultMessage=" - Anyone can join this channel"
                       id="channel_modal.publicHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -2080,6 +1996,7 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               >
                 <label>
                   <input
+                    aria-labelledby="channelModalTypeLabel"
                     checked={true}
                     id="private"
                     name="channelType"
@@ -2095,12 +2012,10 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
                     <FormattedMessage
                       defaultMessage="Private"
                       id="channel_modal.privateName"
-                      values={Object {}}
                     />
                     <FormattedMessage
-                      defaultMessage=" - Only invited members can join this channel."
+                      defaultMessage=" - Only invited members can join this channel"
                       id="channel_modal.privateHint"
-                      values={Object {}}
                     />
                   </div>
                 </label>
@@ -2113,11 +2028,11 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
         >
           <label
             className="col-sm-3 form__label control-label"
+            htmlFor="newChannelName"
           >
             <FormattedMessage
               defaultMessage="Name"
               id="channel_modal.name"
-              values={Object {}}
             />
           </label>
           <div
@@ -2150,7 +2065,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
                 <FormattedMessage
                   defaultMessage="Edit"
                   id="channel_modal.edit"
-                  values={Object {}}
                 />
               </button>
               )
@@ -2165,11 +2079,11 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelPurpose"
             >
               <FormattedMessage
                 defaultMessage="Purpose"
                 id="channel_modal.purpose"
-                values={Object {}}
               />
             </label>
             <label
@@ -2178,7 +2092,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -2200,7 +2113,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               <FormattedMessage
                 defaultMessage="Describe how this channel should be used."
                 id="channel_modal.descriptionHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -2213,11 +2125,11 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
           >
             <label
               className="form__label control-label"
+              htmlFor="newChannelHeader"
             >
               <FormattedMessage
                 defaultMessage="Header"
                 id="channel_modal.header"
-                values={Object {}}
               />
             </label>
             <label
@@ -2226,7 +2138,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               <FormattedMessage
                 defaultMessage="(optional)"
                 id="channel_modal.optional"
-                values={Object {}}
               />
             </label>
           </div>
@@ -2248,7 +2159,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
               <FormattedMessage
                 defaultMessage="Set text that will appear in the header of the channel beside the channel name. For example, include frequently used links by typing [Link Title](http://example.com)."
                 id="channel_modal.headerHelp"
-                values={Object {}}
               />
             </p>
           </div>
@@ -2268,7 +2178,6 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
           <FormattedMessage
             defaultMessage="Cancel"
             id="channel_modal.cancel"
-            values={Object {}}
           />
         </button>
         <button
@@ -2278,9 +2187,8 @@ exports[`components/NewChannelModal should match snapshot, private channel fille
           type="submit"
         >
           <FormattedMessage
-            defaultMessage="Create New Channel"
+            defaultMessage="Create Channel"
             id="channel_modal.createNew"
-            values={Object {}}
           />
         </button>
       </ModalFooter>

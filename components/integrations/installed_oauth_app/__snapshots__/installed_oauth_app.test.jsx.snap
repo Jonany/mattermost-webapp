@@ -36,7 +36,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
           <FormattedMessage
             defaultMessage="Show Secret"
             id="installed_integrations.showSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -48,7 +47,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
           <FormattedMessage
             defaultMessage="Regenerate Secret"
             id="installed_integrations.regenSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -58,7 +56,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
           <FormattedMessage
             defaultMessage="Edit"
             id="installed_integrations.edit"
-            values={Object {}}
           />
         </Link>
          - 
@@ -81,9 +78,9 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Is Trusted: **{isTrusted}**"
           id="installed_oauth_apps.is_trusted"
           values={
@@ -100,7 +97,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
       <span
         className="item-details__token"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Client ID: **{clientId}**"
           id="installed_integrations.client_id"
           values={
@@ -137,7 +134,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot 1`] = `
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
         <FormattedMessage
           defaultMessage="Callback URLs: {urls}"
@@ -196,7 +193,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
         <FormattedMessage
           defaultMessage="Unnamed OAuth 2.0 Application"
           id="installed_integrations.unnamed_oauth_app"
-          values={Object {}}
         />
       </strong>
       <div
@@ -210,7 +206,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
           <FormattedMessage
             defaultMessage="Show Secret"
             id="installed_integrations.showSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -222,7 +217,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
           <FormattedMessage
             defaultMessage="Regenerate Secret"
             id="installed_integrations.regenSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -232,7 +226,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
           <FormattedMessage
             defaultMessage="Edit"
             id="installed_integrations.edit"
-            values={Object {}}
           />
         </Link>
          - 
@@ -259,9 +252,9 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Is Trusted: **{isTrusted}**"
           id="installed_oauth_apps.is_trusted"
           values={
@@ -278,7 +271,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
       <span
         className="item-details__token"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Client ID: **{clientId}**"
           id="installed_integrations.client_id"
           values={
@@ -315,7 +308,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, on err
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
         <FormattedMessage
           defaultMessage="Callback URLs: {urls}"
@@ -374,7 +367,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
         <FormattedMessage
           defaultMessage="Unnamed OAuth 2.0 Application"
           id="installed_integrations.unnamed_oauth_app"
-          values={Object {}}
         />
       </strong>
       <div
@@ -388,7 +380,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
           <FormattedMessage
             defaultMessage="Show Secret"
             id="installed_integrations.showSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -400,7 +391,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
           <FormattedMessage
             defaultMessage="Regenerate Secret"
             id="installed_integrations.regenSecret"
-            values={Object {}}
           />
         </button>
          - 
@@ -410,7 +400,6 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
           <FormattedMessage
             defaultMessage="Edit"
             id="installed_integrations.edit"
-            values={Object {}}
           />
         </Link>
          - 
@@ -433,9 +422,9 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Is Trusted: **{isTrusted}**"
           id="installed_oauth_apps.is_trusted"
           values={
@@ -452,7 +441,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
       <span
         className="item-details__token"
       >
-        <InjectIntl(FormattedMarkdownMessage)
+        <injectIntl(FormattedMarkdownMessage)
           defaultMessage="Client ID: **{clientId}**"
           id="installed_integrations.client_id"
           values={
@@ -489,7 +478,7 @@ exports[`components/integrations/InstalledOAuthApp should match snapshot, when o
       className="item-details__row"
     >
       <span
-        className="item-details__url"
+        className="item-details__url word-break--all"
       >
         <FormattedMessage
           defaultMessage="Callback URLs: {urls}"

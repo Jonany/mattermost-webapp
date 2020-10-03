@@ -8,8 +8,11 @@ import {FormattedMessage} from 'react-intl';
 
 import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 import MattermostLogo from 'components/widgets/icons/mattermost_logo';
+import Nbsp from 'components/html_entities/nbsp';
 
 import {AboutLinks} from 'utils/constants';
+
+import AboutBuildModalCloud from './about_build_modal_cloud/about_build_modal_cloud';
 
 export default class AboutBuildModal extends React.PureComponent {
     static defaultProps = {
@@ -58,6 +61,16 @@ export default class AboutBuildModal extends React.PureComponent {
     render() {
         const config = this.props.config;
         const license = this.props.license;
+
+        if (license.Cloud === 'true') {
+            return (
+                <AboutBuildModalCloud
+                    {...this.props}
+                    {...this.state}
+                    doHide={this.doHide}
+                />
+            );
+        }
 
         let title = (
             <FormattedMessage
@@ -134,7 +147,7 @@ export default class AboutBuildModal extends React.PureComponent {
                             id='about.licensed'
                             defaultMessage='Licensed to:'
                         />
-                        &nbsp;{license.Company}
+                        <Nbsp/>{license.Company}
                     </div>
                 );
             }
@@ -167,15 +180,6 @@ export default class AboutBuildModal extends React.PureComponent {
                 />
             </a>
         );
-
-        let tosPrivacyHyphen;
-        if (config.TermsOfServiceLink && config.PrivacyPolicyLink) {
-            tosPrivacyHyphen = (
-                <span>
-                    {' - '}
-                </span>
-            );
-        }
 
         // Only show build number if it's a number (so only builds from Jenkins)
         let buildnumber = (
@@ -224,7 +228,7 @@ export default class AboutBuildModal extends React.PureComponent {
                         </div>
                         <div>
                             <h3 className='about-modal__title'>{'Mattermost'} {title}</h3>
-                            <p className='about-modal__subtitle padding-bottom'>{subTitle}</p>
+                            <p className='about-modal__subtitle pb-2'>{subTitle}</p>
                             <div className='form-group less'>
                                 <div>
                                     <FormattedMessage
@@ -266,12 +270,12 @@ export default class AboutBuildModal extends React.PureComponent {
                             </div>
                             <div className='about-modal__links'>
                                 {termsOfService}
-                                {tosPrivacyHyphen}
+                                {' - '}
                                 {privacyPolicy}
                             </div>
                         </div>
                     </div>
-                    <div className='about-modal__notice form-group padding-top x2'>
+                    <div className='about-modal__notice form-group pt-3'>
                         <p>
                             <FormattedMarkdownMessage
                                 id='about.notice'
@@ -285,26 +289,26 @@ export default class AboutBuildModal extends React.PureComponent {
                                 id='about.hash'
                                 defaultMessage='Build Hash:'
                             />
-                            &nbsp;{config.BuildHash}
+                            <Nbsp/>{config.BuildHash}
                             <br/>
                             <FormattedMessage
                                 id='about.hashee'
                                 defaultMessage='EE Build Hash:'
                             />
-                            &nbsp;{config.BuildHashEnterprise}
+                            <Nbsp/>{config.BuildHashEnterprise}
                             <br/>
                             <FormattedMessage
                                 id='about.hashwebapp'
                                 defaultMessage='Webapp Build Hash:'
                             />
-                            &nbsp;{/* global COMMIT_HASH */ this.props.webappBuildHash || (typeof COMMIT_HASH === 'undefined' ? '' : COMMIT_HASH)}
+                            <Nbsp/>{/* global COMMIT_HASH */ this.props.webappBuildHash || (typeof COMMIT_HASH === 'undefined' ? '' : COMMIT_HASH)}
                         </p>
                         <p>
                             <FormattedMessage
                                 id='about.date'
                                 defaultMessage='Build Date:'
                             />
-                            &nbsp;{config.BuildDate}
+                            <Nbsp/>{config.BuildDate}
                         </p>
                     </div>
                 </Modal.Body>

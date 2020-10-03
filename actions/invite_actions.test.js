@@ -6,12 +6,9 @@ import configureStore from 'redux-mock-store';
 import {sendMembersInvites, sendGuestsInvites} from 'actions/invite_actions.jsx';
 
 jest.mock('actions/team_actions', () => ({
-    addUsersToTeam: (teamId) => {
-        if (teamId === 'correct') {
-            return ({type: 'MOCK_RECEIVED_ME'});
-        }
-        throw new Error('ERROR');
-    },
+    addUsersToTeam: () => ({ // since we are using addUsersToTeamGracefully, this call will always succeed
+        type: 'MOCK_RECEIVED_ME',
+    }),
 }));
 
 jest.mock('mattermost-redux/actions/channels', () => ({
@@ -28,17 +25,19 @@ jest.mock('mattermost-redux/actions/channels', () => ({
 
 jest.mock('mattermost-redux/actions/teams', () => ({
     getTeamMembersByIds: () => ({type: 'MOCK_RECEIVED_ME'}),
-    sendEmailInvitesToTeam: (team) => {
-        if (team === 'correct') {
-            return ({type: 'MOCK_RECEIVED_ME'});
+    sendEmailInvitesToTeamGracefully: (team, emails) => {
+        // Poor attempt to mock rate limiting.
+        if (emails.length > 21) {
+            return ({type: 'MOCK_RECEIVED_ME', data: emails.map((email) => ({email, error: {message: 'Invite emails rate limit exceeded.'}}))});
         }
-        throw new Error('ERROR');
+        return ({type: 'MOCK_RECEIVED_ME', data: emails.map((email) => ({email, error: team === 'correct' ? undefined : {message: 'Unable to add the user to the team.'}}))});
     },
-    sendEmailGuestInvitesToChannels: (team) => {
-        if (team === 'correct') {
-            return ({type: 'MOCK_RECEIVED_ME'});
+    sendEmailGuestInvitesToChannelsGracefully: (team, channels, emails) => {
+        // Poor attempt to mock rate limiting.
+        if (emails.length > 21) {
+            return ({type: 'MOCK_RECEIVED_ME', data: emails.map((email) => ({email, error: {message: 'Invite emails rate limit exceeded.'}}))});
         }
-        throw new Error('ERROR');
+        return ({type: 'MOCK_RECEIVED_ME', data: emails.map((email) => ({email, error: team === 'correct' ? undefined : {message: 'Unable to add the guest to the channels.'}}))});
     },
 }));
 
@@ -204,7 +203,7 @@ describe('actions/invite_actions', () => {
             ];
             const response = await sendMembersInvites('error', users, [])(store.dispatch, store.getState);
             expect(response).toEqual({
-                sent: [],
+                sent: [{user: {id: 'other-user', roles: 'system_user'}, reason: 'This member has been added to the team.'}],
                 notSent: [
                     {
                         reason: 'This person is already a team member.',
@@ -227,14 +226,24 @@ describe('actions/invite_actions', () => {
                             roles: 'system_guest',
                         },
                     },
-                    {
-                        reason: 'Unable to add the user to the team.',
-                        user: {
-                            id: 'other-user',
-                            roles: 'system_user',
-                        },
-                    },
                 ],
+            });
+        });
+
+        it('should generate a failure for rate limits', async () => {
+            const emails = [];
+            const expectedNotSent = [];
+            for (let i = 0; i < 22; i++) {
+                emails.push('email-' + i + '@example.com');
+                expectedNotSent.push({
+                    email: 'email-' + i + '@example.com',
+                    reason: 'Invite emails rate limit exceeded.',
+                });
+            }
+            const response = await sendMembersInvites('correct', [], emails)(store.dispatch, store.getState);
+            expect(response).toEqual({
+                notSent: expectedNotSent,
+                sent: [],
             });
         });
     });
@@ -382,8 +391,36 @@ describe('actions/invite_actions', () => {
                 {id: 'other-guest', roles: 'system_guest'},
             ];
             const response = await sendGuestsInvites('error', ['correct'], users, [], 'message')(store.dispatch, store.getState);
+
             expect(response).toEqual({
-                sent: [],
+                sent: [
+                    {
+                        user: {
+                            id: 'guest1',
+                            roles: 'system_guest',
+                        },
+                        reason: {
+                            id: 'invite.guests.new-member',
+                            message: 'This guest has been added to the team and {count, plural, one {channel} other {channels}}.',
+                            values: {
+                                count: 1,
+                            },
+                        },
+                    },
+                    {
+                        user: {
+                            id: 'other-guest',
+                            roles: 'system_guest',
+                        },
+                        reason: {
+                            id: 'invite.guests.new-member',
+                            message: 'This guest has been added to the team and {count, plural, one {channel} other {channels}}.',
+                            values: {
+                                count: 1,
+                            },
+                        },
+                    },
+                ],
                 notSent: [
                     {
                         reason: 'This person is already a member.',
@@ -393,24 +430,10 @@ describe('actions/invite_actions', () => {
                         },
                     },
                     {
-                        reason: 'Unable to add the guest to the channels.',
-                        user: {
-                            id: 'guest1',
-                            roles: 'system_guest',
-                        },
-                    },
-                    {
                         reason: 'This person is already a member.',
                         user: {
                             id: 'other-user',
                             roles: 'system_user',
-                        },
-                    },
-                    {
-                        reason: 'Unable to add the guest to the channels.',
-                        user: {
-                            id: 'other-guest',
-                            roles: 'system_guest',
                         },
                     },
                 ],
@@ -457,6 +480,24 @@ describe('actions/invite_actions', () => {
                         },
                     },
                 ],
+            });
+        });
+
+        it('should generate a failure for rate limits', async () => {
+            const emails = [];
+            const expectedNotSent = [];
+            for (let i = 0; i < 22; i++) {
+                emails.push('email-' + i + '@example.com');
+                expectedNotSent.push({
+                    email: 'email-' + i + '@example.com',
+                    reason: 'Invite emails rate limit exceeded.',
+                });
+            }
+
+            const response = await sendGuestsInvites('correct', ['correct'], [], emails, 'message')(store.dispatch, store.getState);
+            expect(response).toEqual({
+                notSent: expectedNotSent,
+                sent: [],
             });
         });
     });

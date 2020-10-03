@@ -4,47 +4,160 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {FormattedMessage, intlShape} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 
 import {isLicenseExpired, isLicenseExpiring, isLicensePastGracePeriod} from 'utils/license_utils.jsx';
-import {AnnouncementBarTypes, AnnouncementBarMessages} from 'utils/constants';
+import {AnnouncementBarTypes, AnnouncementBarMessages, WarnMetricTypes} from 'utils/constants';
+import {intlShape} from 'utils/react_intl';
 
 import {t} from 'utils/i18n';
 
 import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 
-import AnnouncementBar from '../announcement_bar.jsx';
+import AnnouncementBar from '../default_announcement_bar';
 import TextDismissableBar from '../text_dismissable_bar';
 
-const RENEWAL_LINK = 'https://licensing.mattermost.com/renew';
+import ackIcon from 'images/icons/check-circle-outline.svg';
+import alertIcon from 'images/icons/round-white-info-icon.svg';
 
-export default class ConfigurationAnnouncementBar extends React.PureComponent {
+const RENEWAL_LINK = 'https://mattermost.com/renew/';
+
+class ConfigurationAnnouncementBar extends React.PureComponent {
     static propTypes = {
         config: PropTypes.object,
+        intl: intlShape.isRequired,
         license: PropTypes.object,
         user: PropTypes.object,
         canViewSystemErrors: PropTypes.bool.isRequired,
         totalUsers: PropTypes.number,
         dismissedExpiringLicense: PropTypes.bool,
+        dismissedNumberOfActiveUsersWarnMetricStatus: PropTypes.bool,
+        dismissedNumberOfActiveUsersWarnMetricStatusAck: PropTypes.bool,
+        dismissedNumberOfPostsWarnMetricStatus: PropTypes.bool,
+        dismissedNumberOfPostsWarnMetricStatusAck: PropTypes.bool,
         siteURL: PropTypes.string.isRequired,
+        warnMetricsStatus: PropTypes.object,
         actions: PropTypes.shape({
             dismissNotice: PropTypes.func.isRequired,
         }).isRequired,
-    };
-
-    static contextTypes = {
-        intl: intlShape,
     };
 
     dismissExpiringLicense = () => {
         this.props.actions.dismissNotice(AnnouncementBarMessages.LICENSE_EXPIRING);
     }
 
+    dismissNumberOfActiveUsersWarnMetric = () => {
+        this.props.actions.dismissNotice(AnnouncementBarMessages.WARN_METRIC_STATUS_NUMBER_OF_USERS);
+    }
+
+    dismissNumberOfPostsWarnMetric = () => {
+        this.props.actions.dismissNotice(AnnouncementBarMessages.WARN_METRIC_STATUS_NUMBER_OF_POSTS);
+    }
+
+    dismissNumberOfActiveUsersWarnMetricAck = () => {
+        this.props.actions.dismissNotice(AnnouncementBarMessages.WARN_METRIC_STATUS_NUMBER_OF_USERS_ACK);
+    }
+
+    dismissNumberOfPostsWarnMetricAck = () => {
+        this.props.actions.dismissNotice(AnnouncementBarMessages.WARN_METRIC_STATUS_NUMBER_OF_POSTS_ACK);
+    }
+
+    getNoticeForWarnMetric = (warnMetricStatus) => {
+        if (!warnMetricStatus ||
+            (warnMetricStatus.id !== WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_ACTIVE_USERS_500 &&
+            warnMetricStatus.id !== WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_POSTS_2M)) {
+            return null;
+        }
+
+        var message = '';
+        var type = '';
+        var showModal = false;
+        var dismissFunc = null;
+        var isDismissed = null;
+        var canCloseBar = false;
+
+        if (warnMetricStatus.acked) {
+            message = (
+                <React.Fragment>
+                    <img
+                        className='advisor-icon'
+                        src={ackIcon}
+                    />
+                    <FormattedMessage
+                        id='announcement_bar.warn_metric_status_ack.text'
+                        defaultMessage='Thank you for contacting Mattermost. We will follow up with you soon.'
+                    />
+                </React.Fragment>
+            );
+
+            if (warnMetricStatus.id === WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_ACTIVE_USERS_500) {
+                dismissFunc = this.dismissNumberOfActiveUsersWarnMetricAck;
+                isDismissed = this.props.dismissedNumberOfActiveUsersWarnMetricStatusAck;
+            } else if (warnMetricStatus.id === WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_POSTS_2M) {
+                dismissFunc = this.dismissNumberOfPostsWarnMetricAck;
+                isDismissed = this.props.dismissedNumberOfPostsWarnMetricStatusAck;
+            }
+
+            type = AnnouncementBarTypes.ADVISOR_ACK;
+            showModal = false;
+            canCloseBar = true;
+        } else {
+            if (warnMetricStatus.id === WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_ACTIVE_USERS_500) {
+                message = (
+                    <React.Fragment>
+                        <img
+                            className='advisor-icon'
+                            src={alertIcon}
+                        />
+                        <FormattedMarkdownMessage
+                            id='announcement_bar.number_active_users_warn_metric_status.text'
+                            defaultMessage='You now have over {limit} users. We strongly recommend using advanced features for large-scale servers.'
+                            values={{
+                                limit: warnMetricStatus.limit,
+                            }}
+                        />
+                    </React.Fragment>
+                );
+                dismissFunc = this.dismissNumberOfActiveUsersWarnMetric;
+                isDismissed = this.props.dismissedNumberOfActiveUsersWarnMetricStatus;
+            } else if (warnMetricStatus.id === WarnMetricTypes.SYSTEM_WARN_METRIC_NUMBER_OF_POSTS_2M) {
+                message = (
+                    <React.Fragment>
+                        <img
+                            className='advisor-icon'
+                            src={alertIcon}
+                        />
+                        <FormattedMarkdownMessage
+                            id='announcement_bar.number_of_posts_warn_metric_status.text'
+                            defaultMessage='You now have over {limit} posts. We strongly recommend using advanced features for large-scale servers.'
+                            values={{
+                                limit: warnMetricStatus.limit,
+                            }}
+                        />
+                    </React.Fragment>
+                );
+                dismissFunc = this.dismissNumberOfPostsWarnMetric;
+                isDismissed = this.props.dismissedNumberOfPostsWarnMetricStatus;
+            }
+            type = AnnouncementBarTypes.ADVISOR;
+            showModal = true;
+            canCloseBar = false;
+        }
+        return {
+            Message: message,
+            DismissFunc: dismissFunc,
+            IsDismissed: isDismissed,
+            Type: type,
+            ShowModal: showModal,
+            CanCloseBar: canCloseBar,
+        };
+    }
+
     render() {
         // System administrators
         if (this.props.canViewSystemErrors) {
-            const renewalLink = RENEWAL_LINK + '?id=' + this.props.license.id + '&user_count=' + this.props.totalUsers;
-            if (isLicensePastGracePeriod()) {
+            const renewalLink = `${RENEWAL_LINK}?id=${this.props.license.Id}&user_count=${this.props.totalUsers}`;
+            if (isLicensePastGracePeriod(this.props.license)) {
                 return (
                     <AnnouncementBar
                         type={AnnouncementBarTypes.CRITICAL}
@@ -61,7 +174,7 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
                 );
             }
 
-            if (isLicenseExpired()) {
+            if (isLicenseExpired(this.props.license)) {
                 return (
                     <AnnouncementBar
                         type={AnnouncementBarTypes.CRITICAL}
@@ -78,7 +191,7 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
                 );
             }
 
-            if (isLicenseExpiring() && !this.props.dismissedExpiringLicense) {
+            if (isLicenseExpiring(this.props.license) && !this.props.dismissedExpiringLicense) {
                 return (
                     <AnnouncementBar
                         showCloseButton={true}
@@ -97,9 +210,31 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
                     />
                 );
             }
+            if (this.props.license?.IsLicensed === 'false' &&
+                this.props.warnMetricsStatus) {
+                for (const status of Object.values(this.props.warnMetricsStatus)) {
+                    var notice = this.getNoticeForWarnMetric(status);
+                    if (!notice || notice.IsDismissed) {
+                        continue;
+                    }
+
+                    return (
+                        <AnnouncementBar
+                            showCloseButton={notice.CanCloseBar}
+                            handleClose={notice.DismissFunc}
+                            type={notice.Type}
+                            showModal={notice.ShowModal}
+                            modalButtonText={t('announcement_bar.error.warn_metric_status.link')}
+                            modalButtonDefaultText='Learn more'
+                            warnMetricStatus={status}
+                            message={notice.Message}
+                        />
+                    );
+                }
+            }
         } else {
             // Regular users
-            if (isLicensePastGracePeriod()) { //eslint-disable-line no-lonely-if
+            if (isLicensePastGracePeriod(this.props.license)) { //eslint-disable-line no-lonely-if
                 return (
                     <AnnouncementBar
                         type={AnnouncementBarTypes.CRITICAL}
@@ -114,7 +249,7 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
             }
         }
 
-        const {formatMessage} = this.context.intl;
+        const {formatMessage} = this.props.intl;
 
         if (this.props.config.SendEmailNotifications !== 'true' &&
             this.props.config.EnablePreviewModeBanner === 'true'
@@ -138,10 +273,10 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
             let defaultMessage;
             if (this.props.config.EnableSignUpWithGitLab === 'true') {
                 id = t('announcement_bar.error.site_url_gitlab.full');
-                defaultMessage = 'Please configure your [Site URL](https://docs.mattermost.com/administration/config-settings.html#site-url) in the [System Console]({siteURL}/admin_console/environment/web_server) or in gitlab.rb if you\'re using GitLab Mattermost.';
+                defaultMessage = 'Please configure your [site URL](https://docs.mattermost.com/administration/config-settings.html#site-url) either on the [System Console](/admin_console/environment/web_server) or, if you\'re using GitLab Mattermost, in gitlab.rb.';
             } else {
                 id = t('announcement_bar.error.site_url.full');
-                defaultMessage = 'Please configure your [Site URL](https://docs.mattermost.com/administration/config-settings.html#site-url) in the [System Console]({siteURL}/admin_console/environment/web_server).';
+                defaultMessage = 'Please configure your [site URL](https://docs.mattermost.com/administration/config-settings.html#site-url) on the [System Console](/admin_console/environment/web_server).';
             }
 
             const values = {siteURL: this.props.siteURL};
@@ -159,3 +294,5 @@ export default class ConfigurationAnnouncementBar extends React.PureComponent {
         return null;
     }
 }
+
+export default injectIntl(ConfigurationAnnouncementBar);

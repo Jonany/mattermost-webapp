@@ -6,60 +6,50 @@
 // - [*] indicates an assertion (e.g. * Check the title)
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
-import * as TIMEOUTS from '../../fixtures/timeouts';
 
-// Username of a test user that you want to start a DM with
-let username = '';
+// Stage: @prod
+// Group: @messaging
 
-// Function to hover over individual items
-function hoverOverItem(postId, iconName, tooltipName, tooltipText, location = 'CENTER') {
-    // # Get the latest post and hover over it
-    cy.get(`#post_${postId}`).trigger('mouseover');
-
-    // # Hover on the icon that you want to test
-    cy.get(`#${location}_${iconName}_${postId}`).trigger('mouseover', {
-        force: true,
-    });
-
-    // * When hovering on icon, tooltip should appear and text should be valid
-    cy.get(`${tooltipName}`).find('span').should('have.text', tooltipText);
-}
-
-describe('M18697 - Visual verification of tooltips on post hover menu', () => {
+describe('Messaging', () => {
     before(() => {
-        // # Login as user-1
-        cy.apiLogin('user-1');
+        cy.apiInitSetup().then(({team, channel, user: testUser}) => {
+            cy.apiCreateUser().then(({user: otherUser}) => {
+                cy.apiAddUserToTeam(team.id, otherUser.id).then(() => {
+                    cy.apiAddUserToChannel(channel.id, otherUser.id).then(() => {
+                        // # Login as test user and visit town-square
+                        cy.apiLogin(testUser);
 
-        // # Use the API to create a new user
-        cy.createNewUser().then((res) => {
-            username = res.username;
+                        // # Start DM with other user
+                        cy.visit(`/${team.name}/messages/@${otherUser.username}`);
 
-            // # Start DM with new user
-            cy.visit(`/ad-1/messages/@${username}`);
+                        cy.get('#channelIntro').should('be.visible').
+                            and('contain', `This is the start of your direct message history with ${otherUser.username}.`);
+
+                        // # Post test message
+                        cy.postMessage('Test');
+                    });
+                });
+            });
         });
-
-        // # Wait a few ms for the user to be created before sending the test message
-        cy.wait(TIMEOUTS.SMALL);
-
-        // # Post test message
-        cy.postMessage('Test');
     });
 
-    it('Check dotmenu icon tooltip', () => {
+    it('MM-T133 Visual verification of tooltips on post hover menu', () => {
         cy.getLastPostId().then((postId) => {
-            hoverOverItem(postId, 'button', '#dotmenu-icon-tooltip', 'More Actions');
+            verifyToolTip(postId, `#CENTER_button_${postId}`, 'More actions');
+
+            verifyToolTip(postId, `#CENTER_reaction_${postId}`, 'Add Reaction');
+
+            verifyToolTip(postId, `#CENTER_commentIcon_${postId}`, 'Reply');
         });
     });
 
-    it('Check reaction icon tooltip', () => {
-        cy.getLastPostId().then((postId) => {
-            hoverOverItem(postId, 'reaction', '#reaction-icon-tooltip', 'Add Reaction');
-        });
-    });
+    function verifyToolTip(postId, targetElement, label) {
+        cy.get(`#post_${postId}`).trigger('mouseover');
 
-    it('Check comment icon tooltip', () => {
-        cy.getLastPostId().then((postId) => {
-            hoverOverItem(postId, 'commentIcon', '#comment-icon-tooltip', 'Reply');
-        });
-    });
+        cy.get(targetElement).trigger('mouseover', {force: true});
+        cy.findByText(label).should('be.visible');
+
+        cy.get(targetElement).trigger('mouseout', {force: true});
+        cy.findByText(label).should('not.be.visible');
+    }
 });

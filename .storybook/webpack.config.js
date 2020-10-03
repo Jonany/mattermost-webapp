@@ -28,7 +28,9 @@ module.exports = async ({config, mode}) => {
           {
               loader: 'sass-loader',
               options: {
-                  includePaths: ['node_modules/compass-mixins/lib', 'sass'],
+                  sassOptions: {
+                      includePaths: ['node_modules/compass-mixins/lib', 'sass'],
+                  },
               },
           },
       ],
@@ -48,6 +50,7 @@ module.exports = async ({config, mode}) => {
     config.resolve.alias.stores = path.join(path.resolve(__dirname), '..', 'stores')
     config.resolve.alias.storybook = path.join(path.resolve(__dirname), '..', 'storybook')
     config.resolve.alias.utils = path.join(path.resolve(__dirname), '..', 'utils')
+    config.resolve.alias.sounds = path.join(path.resolve(__dirname), '..', 'sounds')
 
     return config;
 };

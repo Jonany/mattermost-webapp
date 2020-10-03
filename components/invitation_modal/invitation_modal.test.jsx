@@ -2,15 +2,12 @@
 // See LICENSE.txt for license information.
 
 import React from 'react';
-import {IntlProvider} from 'react-intl';
 import {shallow} from 'enzyme';
 
 import InvitationModal from './invitation_modal.jsx';
 
 describe('components/invitation_modal/InvitationModal', () => {
-    const intlProvider = new IntlProvider({locale: 'en', defaultLocale: 'en'}, {});
-    const {intl} = intlProvider.getChildContext();
-    const context = {router: {}, intl};
+    const context = {router: {}};
 
     const defaultProps = {
         show: true,
@@ -22,11 +19,14 @@ describe('components/invitation_modal/InvitationModal', () => {
         invitableChannels: [],
         canInviteGuests: true,
         canAddUsers: true,
+        emailInvitationsEnabled: true,
+        isCloud: false,
         actions: {
             closeModal: jest.fn(),
             sendGuestsInvites: jest.fn(),
             sendMembersInvites: jest.fn(),
             searchProfiles: jest.fn(),
+            searchChannels: jest.fn(),
             getTeam: jest.fn(),
         },
     };
@@ -34,7 +34,7 @@ describe('components/invitation_modal/InvitationModal', () => {
     test('should match the snapshot', () => {
         const wrapper = shallow(
             <InvitationModal {...defaultProps}/>,
-            {context}
+            {context},
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -45,7 +45,7 @@ describe('components/invitation_modal/InvitationModal', () => {
                 {...defaultProps}
                 show={false}
             />,
-            {context}
+            {context},
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -56,7 +56,7 @@ describe('components/invitation_modal/InvitationModal', () => {
                 {...defaultProps}
                 canAddUsers={false}
             />,
-            {context}
+            {context},
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -67,7 +67,7 @@ describe('components/invitation_modal/InvitationModal', () => {
                 {...defaultProps}
                 canInviteGuests={false}
             />,
-            {context}
+            {context},
         );
         expect(wrapper).toMatchSnapshot();
     });
@@ -77,8 +77,21 @@ describe('components/invitation_modal/InvitationModal', () => {
         props.currentTeam.invite_id = '';
         const wrapper = shallow(
             <InvitationModal {...props}/>,
-            {context}
+            {context},
         );
+        wrapper.instance().goToMembers();
+
+        expect(props.actions.getTeam).toHaveBeenCalledTimes(1);
+        expect(props.actions.getTeam).toHaveBeenCalledWith(props.currentTeam.id);
+    });
+
+    test('should work properly with full inside (and with the reference to the modal)', () => {
+        const props = {...defaultProps};
+        props.currentTeam.invite_id = '';
+        const wrapper = shallow(
+            <InvitationModal {...props}/>,
+        );
+
         wrapper.instance().goToMembers();
 
         expect(props.actions.getTeam).toHaveBeenCalledTimes(1);

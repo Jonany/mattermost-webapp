@@ -3,15 +3,18 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import {intlShape} from 'react-intl';
+import {injectIntl} from 'react-intl';
 
-export default class ModalToggleButtonRedux extends React.Component {
+import {intlShape} from 'utils/react_intl';
+
+class ModalToggleButtonRedux extends React.PureComponent {
     static propTypes = {
         accessibilityLabel: PropTypes.string,
         children: PropTypes.node.isRequired,
         modalId: PropTypes.string.isRequired,
-        dialogType: PropTypes.func.isRequired,
+        dialogType: PropTypes.elementType.isRequired,
         dialogProps: PropTypes.object,
+        intl: intlShape.isRequired,
         onClick: PropTypes.func,
         className: PropTypes.string,
         actions: PropTypes.shape({
@@ -22,10 +25,6 @@ export default class ModalToggleButtonRedux extends React.Component {
     static defaultProps = {
         dialogProps: {},
         className: '',
-    };
-
-    static contextTypes = {
-        intl: intlShape.isRequired,
     };
 
     show(e) {
@@ -45,15 +44,23 @@ export default class ModalToggleButtonRedux extends React.Component {
     }
 
     render() {
-        const {children, onClick, ...props} = this.props;
-        const {formatMessage} = this.context.intl;
-        const ariaLabel = `${props.accessibilityLabel} ${formatMessage({id: 'accessibility.button.dialog', defaultMessage: 'Dialog'})}`;
+        const {
+            children,
+            onClick,
+            intl: {
+                formatMessage,
+            },
+            ...props
+        } = this.props;
+
+        const ariaLabel = formatMessage({id: 'accessibility.button.dialog', defaultMessage: '{dialogName} dialog'}, {dialogName: props.accessibilityLabel});
 
         // removing these three props since they are not valid props on buttons
         delete props.modalId;
         delete props.dialogType;
         delete props.dialogProps;
         delete props.accessibilityLabel;
+        delete props.actions;
 
         // allow callers to provide an onClick which will be called before the modal is shown
         let clickHandler = () => this.show();
@@ -79,3 +86,4 @@ export default class ModalToggleButtonRedux extends React.Component {
     }
 }
 
+export default injectIntl(ModalToggleButtonRedux);

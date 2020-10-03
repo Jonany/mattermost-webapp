@@ -52,12 +52,11 @@ exports[`components/admin_console/system_users should match default snapshot 1`]
             <FormattedMessage
               defaultMessage="Revoke All Sessions"
               id="admin.system_users.revoke_all_sessions_button"
-              values={Object {}}
             />
           }
           message={
             <div>
-              <InjectIntl(FormattedMarkdownMessage)
+              <injectIntl(FormattedMarkdownMessage)
                 defaultMessage="This action revokes all sessions in the system. All users will be logged out from all devices. Are you sure you want to revoke all sessions?"
                 id="admin.system_users.revoke_all_sessions_modal_message"
               />
@@ -71,12 +70,11 @@ exports[`components/admin_console/system_users should match default snapshot 1`]
             <FormattedMessage
               defaultMessage="Revoke all sessions in the system"
               id="admin.system_users.revoke_all_sessions_modal_title"
-              values={Object {}}
             />
           }
         />
         <div
-          className="padding-top padding-bottom x2"
+          className="pt-3 pb-3"
         >
           <button
             className="btn btn-default"
@@ -86,7 +84,6 @@ exports[`components/admin_console/system_users should match default snapshot 1`]
             <FormattedMessage
               defaultMessage="Revoke All Sessions"
               id="admin.system_users.revokeAllSessions"
-              values={Object {}}
             />
           </button>
         </div>

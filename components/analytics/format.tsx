@@ -1,5 +1,6 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+
 import * as Utils from 'utils/utils.jsx';
 
 export function formatChannelDoughtnutData(totalPublic: any, totalPrivate: any) {
@@ -35,9 +36,9 @@ export function formatPostDoughtnutData(filePosts: any, hashtagPosts: any, total
     return postTypeData;
 }
 
-export function formatPostsPerDayData(data: any) {
-    var chartData = {
-        labels: [] as any,
+export function formatPostsPerDayData(labels: string[], data: any) {
+    const chartData = {
+        labels: [] as string[],
         datasets: [{
             fillColor: 'rgba(151,187,205,0.2)',
             borderColor: 'rgba(151,187,205,1)',
@@ -48,21 +49,24 @@ export function formatPostsPerDayData(data: any) {
             data: [] as any,
         }],
     };
-
-    for (var index in data) {
-        if (data[index]) {
-            var row = data[index];
-            chartData.labels.push(row.name);
-            chartData.datasets[0].data.push(row.value);
-        }
-    }
-
-    return chartData;
+    return fillChartData(chartData, labels, data);
 }
 
-export function formatUsersWithPostsPerDayData(data: any) {
-    var chartData = {
-        labels: [] as any,
+// synchronizeChartLabels converges on a uniform set of labels for all entries in the given chart data.
+// If a given label wasn't already present in the chart data, a 0-valued data point at that label is added.
+export function synchronizeChartLabels(...datas: any) {
+    const labels: Set<string> = new Set();
+    datas.forEach((data: any) => {
+        if (data?.length) {
+            data.forEach((e: any) => labels.add(e.name));
+        }
+    });
+    return Array.from(labels).sort();
+}
+
+export function formatUsersWithPostsPerDayData(labels: string[], data: any) {
+    const chartData = {
+        labels: [] as string[],
         datasets: [{
             label: '',
             fillColor: 'rgba(151,187,205,0.2)',
@@ -74,14 +78,19 @@ export function formatUsersWithPostsPerDayData(data: any) {
             data: [] as any,
         }],
     };
+    return fillChartData(chartData, labels, data);
+}
 
-    for (var index in data) {
-        if (data[index]) {
-            var row = data[index];
-            chartData.labels.push(row.name);
-            chartData.datasets[0].data.push(row.value);
-        }
+function fillChartData(chartData: any, labels: any, data: any) {
+    if (data?.length) {
+        chartData.labels = labels;
+
+        //labels are in order, add in label order...
+        chartData.labels.forEach((label: string) => {
+            const element = data.find((e: any) => e.name === label);
+            const val = element ? element.value : 0;
+            chartData.datasets[0].data.push(val);
+        });
     }
-
     return chartData;
 }

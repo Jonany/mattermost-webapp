@@ -1,12 +1,13 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
+/* eslint-disable react/no-string-refs */
 
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {FormattedMessage} from 'react-intl';
 
-import {trackEvent} from 'actions/diagnostics_actions.jsx';
+import {trackEvent} from 'actions/telemetry_actions.jsx';
 import Constants from 'utils/constants.jsx';
 import {cleanUpUrlable} from 'utils/url';
 import logoImage from 'images/logo.png';
@@ -39,7 +40,7 @@ export default class TeamSignupDisplayNamePage extends React.Component {
 
     submitNext = (e) => {
         e.preventDefault();
-
+        trackEvent('display_name', 'click_next');
         var displayName = this.teamName.current.trim();
         if (!displayName) {
             this.setState({nameError: (
@@ -125,7 +126,7 @@ export default class TeamSignupDisplayNamePage extends React.Component {
                     <button
                         id='teamNameNextButton'
                         type='submit'
-                        className='btn btn-primary margin--extra'
+                        className='btn btn-primary mt-8'
                         onClick={this.submitNext}
                     >
                         <FormattedMessage
@@ -139,3 +140,4 @@ export default class TeamSignupDisplayNamePage extends React.Component {
         );
     }
 }
+/* eslint-disable react/no-string-refs */

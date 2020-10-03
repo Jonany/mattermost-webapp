@@ -5,12 +5,18 @@ exports[`components/RhsComment should match snapshot 1`] = `
   aria-label=""
   className="a11y__section post post--thread same--root post--comment current--user post--compact"
   id="rhsPost_id"
+  onClick={[Function]}
   onFocus={[Function]}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   role="listitem"
   tabIndex="-1"
 >
+  <Connect(injectIntl(PostPreHeader))
+    channelId="channel_id"
+    isFlagged={true}
+    isPinned={false}
+  />
   <div
     className="post__content"
     role="application"
@@ -64,12 +70,6 @@ exports[`components/RhsComment should match snapshot 1`] = `
           <Connect(PostTime)
             eventTime={1502715365009}
             isPermalink={true}
-            location="RHS_COMMENT"
-            postId="id"
-          />
-          <Connect(PostFlagIcon)
-            isEphemeral={false}
-            isFlagged={true}
             location="RHS_COMMENT"
             postId="id"
           />
@@ -140,12 +140,18 @@ exports[`components/RhsComment should match snapshot hovered 1`] = `
   aria-label=""
   className="a11y__section post post--thread same--root post--comment current--user post--compact"
   id="rhsPost_id"
+  onClick={[Function]}
   onFocus={[Function]}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   role="listitem"
   tabIndex="-1"
 >
+  <Connect(injectIntl(PostPreHeader))
+    channelId="channel_id"
+    isFlagged={true}
+    isPinned={false}
+  />
   <div
     className="post__content"
     role="application"
@@ -202,21 +208,16 @@ exports[`components/RhsComment should match snapshot hovered 1`] = `
             location="RHS_COMMENT"
             postId="id"
           />
-          <Connect(PostFlagIcon)
-            isEphemeral={false}
-            isFlagged={true}
-            location="RHS_COMMENT"
-            postId="id"
-          />
         </div>
         <div
-          className="col col__reply"
+          className="col post-menu"
         >
           <Connect(DotMenu)
             enableEmojiPicker={true}
             handleAddReactionClick={[Function]}
             handleDropdownOpened={[Function]}
             isFlagged={true}
+            isMenuOpen={false}
             isReadOnly={false}
             location="RHS_COMMENT"
             post={
@@ -247,6 +248,11 @@ exports[`components/RhsComment should match snapshot hovered 1`] = `
             showEmojiPicker={false}
             teamId="team_id"
             toggleEmojiPicker={[Function]}
+          />
+          <Connect(PostFlagIcon)
+            isFlagged={true}
+            location="RHS_COMMENT"
+            postId="id"
           />
         </div>
       </div>
@@ -315,12 +321,18 @@ exports[`components/RhsComment should match snapshot hovered on deleted post 1`]
   aria-label=""
   className="a11y__section post post--thread same--root post--comment current--user post--compact"
   id="rhsPost_id"
+  onClick={[Function]}
   onFocus={[Function]}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   role="listitem"
   tabIndex="-1"
 >
+  <Connect(injectIntl(PostPreHeader))
+    channelId="channel_id"
+    isFlagged={true}
+    isPinned={false}
+  />
   <div
     className="post__content"
     role="application"
@@ -375,12 +387,6 @@ exports[`components/RhsComment should match snapshot hovered on deleted post 1`]
           <Connect(PostTime)
             eventTime={1502715365009}
             isPermalink={false}
-            location="RHS_COMMENT"
-            postId="id"
-          />
-          <Connect(PostFlagIcon)
-            isEphemeral={true}
-            isFlagged={true}
             location="RHS_COMMENT"
             postId="id"
           />
@@ -464,12 +470,18 @@ exports[`components/RhsComment should match snapshot mobile 1`] = `
   aria-label=""
   className="a11y__section post post--thread same--root post--comment current--user post--compact"
   id="rhsPost_id"
+  onClick={[Function]}
   onFocus={[Function]}
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
   role="listitem"
   tabIndex="-1"
 >
+  <Connect(injectIntl(PostPreHeader))
+    channelId="channel_id"
+    isFlagged={true}
+    isPinned={false}
+  />
   <div
     className="post__content"
     role="application"
@@ -526,21 +538,16 @@ exports[`components/RhsComment should match snapshot mobile 1`] = `
             location="RHS_COMMENT"
             postId="id"
           />
-          <Connect(PostFlagIcon)
-            isEphemeral={false}
-            isFlagged={true}
-            location="RHS_COMMENT"
-            postId="id"
-          />
         </div>
         <div
-          className="col col__reply"
+          className="col post-menu"
         >
           <Connect(DotMenu)
             enableEmojiPicker={true}
             handleAddReactionClick={[Function]}
             handleDropdownOpened={[Function]}
             isFlagged={true}
+            isMenuOpen={false}
             isReadOnly={false}
             location="RHS_COMMENT"
             post={

@@ -38,7 +38,7 @@ export default class ErrorPage extends React.PureComponent<Props> {
         const params: URLSearchParams = new URLSearchParams(this.props.location.search);
         const signature = params.get('s');
 
-        var trustParams = false;
+        let trustParams = false;
         if (signature) {
             params.delete('s');
 
@@ -80,7 +80,7 @@ export default class ErrorPage extends React.PureComponent<Props> {
             );
         } else if (type === ErrorPageTypes.CHANNEL_NOT_FOUND && isGuest) {
             backButton = (
-                <Link to={params.get('returnTo') as string}>
+                <Link to='/'>
                     <FormattedMessage
                         id='error.channelNotFound.guest_link'
                         defaultMessage='Back'
@@ -104,10 +104,12 @@ export default class ErrorPage extends React.PureComponent<Props> {
                 <Link to='/'>
                     <FormattedMessage
                         id='error.generic.link_login'
-                        defaultMessage='Back to login page'
+                        defaultMessage='Back to Login Page'
                     />
                 </Link>
             );
+        } else if (type === ErrorPageTypes.OAUTH_INVALID_PARAM || type === ErrorPageTypes.OAUTH_INVALID_REDIRECT_URL) {
+            backButton = null;
         } else {
             backButton = (
                 <Link to='/'>
@@ -128,7 +130,9 @@ export default class ErrorPage extends React.PureComponent<Props> {
                     <div className='error__icon'>
                         <WarningIcon/>
                     </div>
-                    <h2>
+                    <h2
+                        data-testid='errorMessageTitle'
+                    >
                         <ErrorTitle
                             type={type}
                             title={title}
@@ -138,6 +142,7 @@ export default class ErrorPage extends React.PureComponent<Props> {
                         type={type}
                         message={message}
                         service={service}
+                        isGuest={isGuest}
                     />
                     {backButton}
                 </div>

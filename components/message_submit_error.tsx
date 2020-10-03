@@ -16,7 +16,7 @@ interface MessageSubmitErrorProps {
     submittedMessage?: string;
 }
 
-class MessageSubmitError extends React.PureComponent<MessageSubmitErrorProps, {}> {
+class MessageSubmitError extends React.PureComponent<MessageSubmitErrorProps> {
     public renderSlashCommandError = (): string | ReactFragment => {
         if (!this.props.submittedMessage) {
             return this.props.error.message;
@@ -27,7 +27,7 @@ class MessageSubmitError extends React.PureComponent<MessageSubmitErrorProps, {}
             <React.Fragment>
                 <FormattedMessage
                     id='message_submit_error.invalidCommand'
-                    defaultMessage={'Command with a trigger of \'{command}\' not found. '}
+                    defaultMessage="Command with a trigger of ''{command}'' not found. "
                     values={{
                         command,
                     }}

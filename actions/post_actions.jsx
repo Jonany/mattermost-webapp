@@ -24,27 +24,31 @@ import {
 import {matchEmoticons} from 'utils/emoticons';
 import * as UserAgent from 'utils/user_agent';
 
-import {completePostReceive} from './post_utils';
+import {completePostReceive} from './new_post';
 
 export function handleNewPost(post, msg) {
     return async (dispatch, getState) => {
         let websocketMessageProps = {};
+        const state = getState();
         if (msg) {
             websocketMessageProps = msg.data;
         }
 
-        const myChannelMember = getMyChannelMemberSelector(getState(), post.channel_id);
-        if (myChannelMember && Object.keys(myChannelMember).length === 0 && myChannelMember.constructor === 'Object') {
+        const myChannelMember = getMyChannelMemberSelector(state, post.channel_id);
+        const myChannelMemberDoesntExist = !myChannelMember || (Object.keys(myChannelMember).length === 0 && myChannelMember.constructor === 'Object');
+
+        if (myChannelMemberDoesntExist) {
             await dispatch(getMyChannelMember(post.channel_id));
         }
 
-        dispatch(completePostReceive(post, websocketMessageProps));
+        dispatch(completePostReceive(post, websocketMessageProps, myChannelMemberDoesntExist));
 
         if (msg && msg.data) {
+            const currentUserId = getCurrentUserId(state);
             if (msg.data.channel_type === Constants.DM_CHANNEL) {
-                loadNewDMIfNeeded(post.channel_id);
+                dispatch(loadNewDMIfNeeded(post.channel_id, currentUserId));
             } else if (msg.data.channel_type === Constants.GM_CHANNEL) {
-                loadNewGMIfNeeded(post.channel_id);
+                dispatch(loadNewGMIfNeeded(post.channel_id));
             }
         }
     };
@@ -225,6 +229,14 @@ export function setEditingPost(postId = '', commentCount = 0, refocusId = '', ti
     };
 }
 
+export function markPostAsUnread(post) {
+    return async (dispatch, getState) => {
+        const state = getState();
+        const userId = getCurrentUserId(state);
+        await dispatch(PostActions.setUnreadPost(userId, post.id));
+    };
+}
+
 export function hideEditPostModal() {
     return {
         type: ActionTypes.HIDE_EDIT_POST_MODAL,
@@ -263,12 +275,27 @@ export function deleteAndRemovePost(post) {
 
 export function toggleEmbedVisibility(postId) {
     return (dispatch, getState) => {
-        const visible = isEmbedVisible(getState(), postId);
+        const state = getState();
+        const currentUserId = getCurrentUserId(state);
+        const visible = isEmbedVisible(state, postId);
 
-        dispatch(StorageActions.setGlobalItem(StoragePrefixes.EMBED_VISIBLE + postId, !visible));
+        dispatch(StorageActions.setGlobalItem(StoragePrefixes.EMBED_VISIBLE + currentUserId + '_' + postId, !visible));
     };
 }
 
 export function resetEmbedVisibility() {
     return StorageActions.actionOnGlobalItemsWithPrefix(StoragePrefixes.EMBED_VISIBLE, () => null);
+}
+
+/**
+ * It is called from either center or rhs text input when shortcut for react to last message is pressed
+ *
+ * @param {string} emittedFrom - It can be either "CENTER", "RHS_ROOT" or "NO_WHERE"
+ */
+
+export function emitShortcutReactToLastPostFrom(emittedFrom) {
+    return {
+        type: ActionTypes.EMITTED_SHORTCUT_REACT_TO_LAST_POST,
+        payload: emittedFrom,
+    };
 }

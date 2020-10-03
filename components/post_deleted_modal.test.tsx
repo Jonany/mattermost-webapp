@@ -5,7 +5,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {Modal} from 'react-bootstrap';
 
-import {mountWithIntl} from 'tests/helpers/intl-test-helper.jsx';
+import {mountWithIntl} from 'tests/helpers/intl-test-helper';
 import PostDeletedModal from 'components/post_deleted_modal';
 
 describe('components/ChannelInfoModal', () => {
@@ -16,7 +16,7 @@ describe('components/ChannelInfoModal', () => {
             <PostDeletedModal
                 show={true}
                 onHide={emptyFunction}
-            />
+            />,
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -29,7 +29,7 @@ describe('components/ChannelInfoModal', () => {
             <PostDeletedModal
                 show={false}
                 onHide={emptyFunction}
-            />
+            />,
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -44,7 +44,7 @@ describe('components/ChannelInfoModal', () => {
             <PostDeletedModal
                 show={true}
                 onHide={onHide}
-            />
+            />,
         );
 
         wrapper.find(Modal).first().props().onHide();
@@ -57,7 +57,7 @@ describe('components/ChannelInfoModal', () => {
             <PostDeletedModal
                 show={false}
                 onHide={emptyFunction}
-            />
+            />,
         );
         const shouldUpdate = wrapper.instance().shouldComponentUpdate!({show: true}, {}, null);
         expect(shouldUpdate).toBe(true);

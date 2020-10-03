@@ -39,7 +39,7 @@ exports[`components/AddGroupsToTeamModal should match snapshot 1`] = `
       componentClass="h1"
     >
       <FormattedMessage
-        defaultMessage="Add New Groups To {teamName} Team"
+        defaultMessage="Add New Groups to {teamName} Team"
         id="add_groups_to_team.title"
         values={
           Object {
@@ -87,6 +87,11 @@ exports[`components/AddGroupsToTeamModal should match snapshot 1`] = `
       perPage={50}
       placeholderText="Search and add groups"
       saving={false}
+      selectedItemRef={
+        Object {
+          "current": null,
+        }
+      }
       valueRenderer={[Function]}
       values={Array []}
     />
@@ -98,6 +103,7 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
 <div
   className="more-modal__row clickable "
   onClick={[Function]}
+  onMouseMove={[Function]}
 >
   <img
     alt="group picture"
@@ -112,9 +118,9 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
     <div
       className="more-modal__name"
     >
-       
+      <Nbsp />
       -
-       
+      <Nbsp />
       <span
         className="more-modal__name_sub"
       >
@@ -146,6 +152,7 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
 <div
   className="more-modal__row clickable more-modal__row--selected"
   onClick={[Function]}
+  onMouseMove={[Function]}
 >
   <img
     alt="group picture"
@@ -160,9 +167,9 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
     <div
       className="more-modal__name"
     >
-       
+      <Nbsp />
       -
-       
+      <Nbsp />
       <span
         className="more-modal__name_sub"
       >
@@ -194,6 +201,7 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
 <div
   className="more-modal__row clickable more-modal__row--selected"
   onClick={[Function]}
+  onMouseMove={[Function]}
 >
   <img
     alt="group picture"
@@ -208,9 +216,9 @@ exports[`components/AddGroupsToTeamModal should match when renderOption is calle
     <div
       className="more-modal__name"
     >
-       
+      <Nbsp />
       -
-       
+      <Nbsp />
       <span
         className="more-modal__name_sub"
       >

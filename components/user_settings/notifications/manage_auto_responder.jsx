@@ -3,7 +3,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import AutosizeTextarea from 'components/autosize_textarea';
 import SettingItemMax from 'components/setting_item_max.jsx';
@@ -69,7 +69,7 @@ export default class ManageAutoResponder extends React.PureComponent {
                 id='autoResponderMessage'
                 key='autoResponderMessage'
             >
-                <div className='padding-top'>
+                <div className='pt-2'>
                     <AutosizeTextarea
                         style={{resize: 'none'}}
                         id='autoResponderMessageInput'
@@ -92,9 +92,9 @@ export default class ManageAutoResponder extends React.PureComponent {
         inputs.push((
             <div
                 key='autoResponderHint'
-                className='margin-top x3'
+                className='mt-5'
             >
-                <FormattedHTMLMessage
+                <FormattedMessage
                     id='user.settings.notifications.autoResponderHint'
                     defaultMessage='Set a custom message that will be automatically sent in response to Direct Messages. Mentions in Public and Private Channels will not trigger the automated reply. Enabling Automatic Replies sets your status to Out of Office and disables email and push notifications.'
                 />

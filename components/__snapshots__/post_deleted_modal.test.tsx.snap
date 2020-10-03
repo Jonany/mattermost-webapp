@@ -7,6 +7,7 @@ exports[`components/ChannelInfoModal should match snapshot when modal is not sho
   autoFocus={true}
   backdrop={true}
   bsClass="modal"
+  data-testid="postDeletedModal"
   dialogClassName="a11y__modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
@@ -42,7 +43,6 @@ exports[`components/ChannelInfoModal should match snapshot when modal is not sho
       <FormattedMessage
         defaultMessage="Comment could not be posted"
         id="post_delete.notPosted"
-        values={Object {}}
       />
     </ModalTitle>
   </ModalHeader>
@@ -54,7 +54,6 @@ exports[`components/ChannelInfoModal should match snapshot when modal is not sho
       <FormattedMessage
         defaultMessage="Someone deleted the message on which you tried to post a comment."
         id="post_delete.someone"
-        values={Object {}}
       />
     </p>
   </ModalBody>
@@ -65,13 +64,13 @@ exports[`components/ChannelInfoModal should match snapshot when modal is not sho
     <button
       autoFocus={true}
       className="btn btn-primary"
+      data-testid="postDeletedModalOkButton"
       onClick={[Function]}
       type="button"
     >
       <FormattedMessage
         defaultMessage="Okay"
         id="post_delete.okay"
-        values={Object {}}
       />
     </button>
   </ModalFooter>
@@ -85,6 +84,7 @@ exports[`components/ChannelInfoModal should match snapshot when modal is showing
   autoFocus={true}
   backdrop={true}
   bsClass="modal"
+  data-testid="postDeletedModal"
   dialogClassName="a11y__modal"
   dialogComponentClass={[Function]}
   enforceFocus={true}
@@ -120,7 +120,6 @@ exports[`components/ChannelInfoModal should match snapshot when modal is showing
       <FormattedMessage
         defaultMessage="Comment could not be posted"
         id="post_delete.notPosted"
-        values={Object {}}
       />
     </ModalTitle>
   </ModalHeader>
@@ -132,7 +131,6 @@ exports[`components/ChannelInfoModal should match snapshot when modal is showing
       <FormattedMessage
         defaultMessage="Someone deleted the message on which you tried to post a comment."
         id="post_delete.someone"
-        values={Object {}}
       />
     </p>
   </ModalBody>
@@ -143,13 +141,13 @@ exports[`components/ChannelInfoModal should match snapshot when modal is showing
     <button
       autoFocus={true}
       className="btn btn-primary"
+      data-testid="postDeletedModalOkButton"
       onClick={[Function]}
       type="button"
     >
       <FormattedMessage
         defaultMessage="Okay"
         id="post_delete.okay"
-        values={Object {}}
       />
     </button>
   </ModalFooter>

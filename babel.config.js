@@ -26,7 +26,6 @@ const config = {
     ],
     plugins: [
         '@babel/plugin-proposal-class-properties',
-        '@babel/plugin-syntax-dynamic-import',
         '@babel/proposal-object-rest-spread',
         'react-hot-loader/babel',
         'babel-plugin-typescript-to-proptypes',

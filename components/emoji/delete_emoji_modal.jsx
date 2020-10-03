@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import DeleteModalTrigger from 'components/delete_modal_trigger.jsx';
+import DeleteModalTrigger from 'components/delete_modal_trigger';
 import WarningIcon from 'components/widgets/icons/fa_warning_icon';
 
 export default class DeleteEmoji extends DeleteModalTrigger {
@@ -33,7 +33,7 @@ export default class DeleteEmoji extends DeleteModalTrigger {
     get modalMessage() {
         return (
             <div className='alert alert-warning'>
-                <WarningIcon additionalClassName='fa-margin--right'/>
+                <WarningIcon additionalClassName='mr-1'/>
                 <FormattedMessage
                     id='emoji_list.delete.confirm.msg'
                     defaultMessage='This action permanently deletes the custom emoji. Are you sure you want to delete it?'

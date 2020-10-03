@@ -1,56 +1,36 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import React from 'react';
-import {intlShape} from 'react-intl';
+import React, {InputHTMLAttributes} from 'react';
+import {useIntl, MessageDescriptor} from 'react-intl';
+import {PrimitiveType, FormatXMLElementFn} from 'intl-messageformat';
 
-type Props = {
-    placeholder: {
-        id: string;
-        defaultMessage: string;
+export type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'placeholder'> & {
+    placeholder: MessageDescriptor & {
+        values?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
     };
-    value?: string;
-}
+};
 
-export default class LocalizedInput extends React.Component<Props> {
-    public static contextTypes = {
-        intl: intlShape.isRequired,
-    };
-    public input: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
+const LocalizedInput = React.forwardRef((props: Props, ref?: React.Ref<HTMLInputElement>) => {
+    const {
+        placeholder: {
+            id,
+            defaultMessage,
+            values,
+        },
+        ...otherProps
+    } = props;
 
-    public get value(): string {
-        return this.input.current ? this.input.current.value : '';
-    }
+    const {formatMessage} = useIntl();
 
-    public set value(value: string) {
-        if (this.input.current) {
-            this.input.current.value = value;
-        }
-    }
+    return (
+        <input
+            {...otherProps}
+            ref={ref}
+            placeholder={formatMessage({id, defaultMessage}, values)}
+        />
+    );
+});
+LocalizedInput.displayName = 'LocalizedInput';
 
-    public focus = (): void => {
-        if (this.input.current) {
-            this.input.current.focus();
-        }
-    };
-
-    public shouldComponentUpdate(nextProps: Props): boolean {
-        return nextProps.value !== this.props.value ||
-            nextProps.placeholder.id !== this.props.placeholder.id ||
-            nextProps.placeholder.defaultMessage !== this.props.placeholder.defaultMessage;
-    }
-
-    public render(): JSX.Element {
-        const {formatMessage} = this.context.intl;
-        const {placeholder, ...otherProps} = this.props;
-        const placeholderString: string = formatMessage(placeholder);
-
-        return (
-            <input
-                ref={this.input}
-                {...otherProps}
-                placeholder={placeholderString}
-            />
-        );
-    }
-}
+export default LocalizedInput;

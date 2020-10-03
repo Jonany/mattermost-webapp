@@ -7,143 +7,96 @@
 // - Use element ID when selecting an element. Create one if none.
 // ***************************************************************
 
+// Stage: @prod
+// Group: @channel
+
 import * as TIMEOUTS from '../../fixtures/timeouts';
 
-describe('Channel Mention Autocomplete', () => {
-    before(() => {
-        // # Login and go to /
-        cy.apiLogin('user-1');
-        cy.visit('/');
+describe('Channel', () => {
+    let testTeam;
+    let ownChannel;
+    let otherChannel;
+    let testUser;
 
-        // # Clear channel textbox
-        cy.clearPostTextbox('town-square');
+    before(() => {
+        // # Login as new user and visit town-square
+        cy.apiInitSetup().then(({team, channel, user}) => {
+            testTeam = team;
+            ownChannel = channel;
+            testUser = user;
+
+            cy.apiCreateChannel(testTeam.id, 'delta-test', 'Delta Channel').then((out) => {
+                otherChannel = out.channel;
+            });
+
+            cy.apiLogin(testUser);
+            cy.visit(`/${team.name}/channels/town-square`);
+        });
     });
 
-    it('Channel mention autocomplete should have both lists populated correctly', () => {
-        // # Go to Town Square
-        cy.get('#sidebarItem_town-square').click({force: true});
+    it('Channel autocomplete should have both lists populated correctly', () => {
+        // # Type "~"
+        cy.get('#post_textbox').should('be.visible').clear().type('~').wait(TIMEOUTS.HALF_SEC);
+        cy.get('#loadingSpinner').should('not.exist');
 
-        // * Validate if the channel has been opened
-        cy.url().should('include', '/channels/town-square');
-
-        // # Start typing "~"
-        cy.get('#post_textbox').should('be.visible').type('~');
-
-        // * At mention auto-complete appears
-        cy.get('#suggestionList').should('be.visible');
-
-        // * My Channels list should be visible
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).should('be.visible', 'contain', 'My Channels');
-
-        // * My Channels list should contain Town Square channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).nextAll().eq(2).should('contain', 'Town Square');
-
-        // * My Channels list should NOT contain Off Topic channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).nextAll().should('not.contain', 'Off Topic');
-
-        // # Wait for Other Channels list to get populated
-        cy.wait(TIMEOUTS.TINY);
-
-        // * Other Channels list should be visible
-        cy.get('#suggestionList .suggestion-list__divider').eq(1).should('be.visible', 'contain', 'Other Channels');
-
-        // * Other Channels list should contain Off Topic channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(1).nextAll().eq(2).should('contain', 'Off-Topic');
-
-        // * Other Channels list should not contain Town Square channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(1).nextAll().should('not.contain', 'Town Square');
-
-        // # Clear channel textbox
-        cy.clearPostTextbox('town-square');
+        // * Should open up suggestion list for channels
+        // * Should match each channel item and group label
+        cy.get('#suggestionList').should('be.visible').children().within((el) => {
+            cy.wrap(el).eq(0).should('contain', 'My Channels');
+            cy.wrap(el).eq(1).should('contain', ownChannel.display_name);
+            cy.wrap(el).eq(2).should('contain', 'Off-Topic');
+            cy.wrap(el).eq(3).should('contain', 'Town Square');
+            cy.wrap(el).eq(4).should('contain', 'Other Channels');
+            cy.wrap(el).eq(5).should('contain', otherChannel.display_name);
+        });
     });
 
     it('Joining a channel should alter channel mention autocomplete lists accordingly', () => {
-        // # Go to Town Square
-        cy.get('#sidebarItem_town-square').click({force: true});
+        // # Join a channel by /join slash command
+        cy.get('#post_textbox').should('be.visible').clear().wait(TIMEOUTS.HALF_SEC).type(`/join ~${otherChannel.name}`).type('{enter}').wait(TIMEOUTS.HALF_SEC);
 
-        // * Validate if the channel has been opened
-        cy.url().should('include', '/channels/town-square');
+        // * Verify that it redirects into the channel
+        cy.url().should('include', `/${testTeam.name}/channels/${otherChannel.name}`);
 
-        // # Start typing "~off-topic"
-        cy.get('#post_textbox').should('be.visible').type('/join ~off-topic');
+        // # Type "~"
+        cy.get('#post_textbox').should('be.visible').type('~').wait(TIMEOUTS.HALF_SEC);
+        cy.get('#loadingSpinner').should('not.exist');
 
-        // # Wait for Other Channels list to get populated
-        cy.wait(TIMEOUTS.TINY);
-
-        // * Other Channels list should be visible
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).should('be.visible', 'contain', 'Other Channels');
-
-        // * Other Channels list should ONLY contain Off Topic channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).nextAll().eq(0).should('contain', 'Off-Topic');
-
-        // # Join Off Topic
-        cy.get('#create_post').submit();
-
-        // # Wait for channel to be joined
-        cy.wait(TIMEOUTS.TINY);
-
-        // # Go to Town Square
-        cy.get('#sidebarItem_town-square').click({force: true});
-
-        // * Validate if the channel has been opened
-        cy.url().should('include', '/channels/town-square');
-
-        // # Start typing "~"
-        cy.get('#post_textbox').should('be.visible').type('~');
-
-        // * My Channels list should be visible
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).should('be.visible', 'contain', 'My Channels');
-
-        // * My Channels list should contain Off Topic channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(0).nextAll().eq(1).should('contain', 'Off-Topic');
-
-        // # Wait for Other Channels list to get populated
-        cy.wait(TIMEOUTS.TINY);
-
-        // * Other Channels list should be visible
-        cy.get('#suggestionList .suggestion-list__divider').eq(1).should('be.visible', 'contain', 'Other Channels');
-
-        // * Other Channels list should NOT contain Off Topic channel
-        cy.get('#suggestionList .suggestion-list__divider').eq(1).nextAll().should('not.contain', 'Off-Topic');
-
-        // # Clear channel textbox
-        cy.clearPostTextbox('town-square');
+        // * Should open up suggestion list for channels
+        // * Should match each channel item and group label
+        cy.get('#suggestionList').should('be.visible').children().within((el) => {
+            cy.wrap(el).eq(0).should('contain', 'My Channels');
+            cy.wrap(el).eq(1).should('contain', ownChannel.display_name);
+            cy.wrap(el).eq(2).should('contain', otherChannel.display_name);
+            cy.wrap(el).eq(3).should('contain', 'Off-Topic');
+            cy.wrap(el).eq(4).should('contain', 'Town Square');
+        });
     });
 
     it('Getting removed from a channel should alter channel mention autocomplete lists accordingly', () => {
-        let channelId;
-        cy.apiGetChannelByName('ad-1', 'Off-Topic').then((res) => {
-            channelId = res.body.id;
-            return cy.apiGetMe();
-        }).then((res) => {
-            const userId = res.body.id;
-            return cy.removeUserFromChannel(channelId, userId);
-        }).then((res) => {
-            expect(res).to.equal(200);
+        // # Remove test user from the test channel
+        cy.apiAdminLogin();
+        cy.removeUserFromChannel(otherChannel.id, testUser.id).then((res) => {
+            expect(res.status).to.equal(200);
 
-            // # Go to Town Square
-            cy.get('#sidebarItem_town-square').click({force: true});
+            // # Login as test user and visit the test team
+            cy.apiLogin(testUser);
+            cy.visit(`/${testTeam.name}/channels/town-square`);
 
-            // * Validate if the channel has been opened
-            cy.url().should('include', '/channels/town-square');
+            // # Type "~"
+            cy.get('#post_textbox').should('be.visible').clear().type('~').wait(TIMEOUTS.HALF_SEC);
+            cy.get('#loadingSpinner').should('not.exist');
 
-            // # Start typing "~"
-            cy.get('#post_textbox').should('be.visible').type('~');
-
-            // * My Channels list should NOT contain Off Topic channel
-            cy.get('#suggestionList .suggestion-list__divider').eq(0).nextAll().should('not.contain', 'Off Topic');
-
-            // # Wait for Other Channels list to get populated
-            cy.wait(TIMEOUTS.TINY);
-
-            // * Other Channels list should be visible
-            cy.get('#suggestionList .suggestion-list__divider').eq(1).should('be.visible', 'contain', 'Other Channels');
-
-            // * Other Channels list should contain Off Topic channel
-            cy.get('#suggestionList .suggestion-list__divider').eq(1).nextAll().should('contain', 'Off-Topic');
-
-            // # Clear channel textbox
-            cy.clearPostTextbox('town-square');
+            // * Should open up suggestion list for channels
+            // * Should match each channel item and group label
+            cy.get('#suggestionList').should('be.visible').children().within((el) => {
+                cy.wrap(el).eq(0).should('contain', 'My Channels');
+                cy.wrap(el).eq(1).should('contain', ownChannel.display_name);
+                cy.wrap(el).eq(2).should('contain', 'Off-Topic');
+                cy.wrap(el).eq(3).should('contain', 'Town Square');
+                cy.wrap(el).eq(4).should('contain', 'Other Channels');
+                cy.wrap(el).eq(5).should('contain', otherChannel.display_name);
+            });
         });
     });
 });
